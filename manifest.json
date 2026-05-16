@@ -1,0 +1,27 @@
+{
+  "id": "sonic0810-bapbap-customserver",
+  "authors": [
+    "Sonic0810",
+    "Codex"
+  ],
+  "origin": "https://github.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates.git",
+  "url": "https://github.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates",
+  "imagefile": "",
+  "prefix": "BAPBAP",
+  "repotype": "AppTemplates",
+  "configs": [
+    {
+      "id": "bapcustomservergithub",
+      "AppConfigId": "44e7d745-1fbc-4db3-b328-69bbf7178a21",
+      "DisplayName": "BAPBAP Custom Server GitHub AutoInstall",
+      "Description": "Linux web-panel-safe BAPBAP custom server installer that downloads the full server/game package from a GitHub Release.",
+      "kvp": "bapcustomservergithub.kvp",
+      "supportedFiles": [
+        "bapcustomservergithubconfig.json",
+        "bapcustomservergithubmetaconfig.json",
+        "bapcustomservergithubports.json",
+        "bapcustomservergithubupdates.json"
+      ]
+    }
+  ]
+}

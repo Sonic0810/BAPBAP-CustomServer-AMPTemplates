@@ -1,0 +1,42 @@
+[
+  {
+    "UpdateStageName": "Download BAPBAP Custom Server full package",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "GithubRelease",
+    "UpdateSourceArgs": "Sonic0810/BAPBAP-CustomServer-AMPTemplates",
+    "UpdateSourceData": "bapcustomserver-amp-full-linux-wine.zip",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UnzipUpdateSource": true,
+    "OverwriteExistingFiles": true,
+    "DeleteAfterExtract": true,
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Set server executable flag",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "SetExecutableFlag",
+    "UpdateSourceArgs": "{{$FullBaseDir}}BapCustomServer/BapCustomServer",
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Set web-panel script executable flag",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "SetExecutableFlag",
+    "UpdateSourceArgs": "{{$FullBaseDir}}BapCustomServer/amp-webpanel-start.sh",
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Set start script executable flag",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "SetExecutableFlag",
+    "UpdateSourceArgs": "{{$FullBaseDir}}BapCustomServer/start-linux-wine.sh",
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Set dump helper executable flag",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "SetExecutableFlag",
+    "UpdateSourceArgs": "{{$FullBaseDir}}BapCustomServer/createdump",
+    "SkipOnFailure": false
+  }
+]
