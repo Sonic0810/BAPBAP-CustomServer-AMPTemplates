@@ -1,0 +1,37 @@
+[
+  {
+    "Protocol": "TCP",
+    "Port": 5055,
+    "Ref": "ApplicationPort1",
+    "Name": "Lobby HTTP/WebSocket",
+    "Description": "ASP.NET lobby API, socket discovery, and /ws endpoint."
+  },
+  {
+    "Protocol": "TCP",
+    "Port": 7777,
+    "Ref": "ApplicationPort2",
+    "Name": "Match WebSocket",
+    "Description": "Base WebSocket port for launched match processes."
+  },
+  {
+    "Protocol": "UDP",
+    "Port": 7778,
+    "Ref": "ApplicationPort3",
+    "Name": "Match KCP",
+    "Description": "Base KCP/UDP port for launched match processes."
+  },
+  {
+    "Protocol": "TCP",
+    "Port": 7779,
+    "Ref": "ApplicationPort4",
+    "Name": "Match TCP",
+    "Description": "Base TCP port for launched match processes."
+  },
+  {
+    "Protocol": "TCP",
+    "Port": 7850,
+    "Ref": "ApplicationPort5",
+    "Name": "Match Bootstrap HTTP",
+    "Description": "Base local HTTP bootstrap port for launched match processes."
+  }
+]
