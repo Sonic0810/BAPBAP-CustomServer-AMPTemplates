@@ -1,35 +1,83 @@
-GenericModule.Meta.AppConfigId=44e7d745-1fbc-4db3-b328-69bbf7178a21
-GenericModule.Meta.DisplayName=BAPBAP Custom Server GitHub AutoInstall
-GenericModule.Meta.Description=Linux web-panel-safe BAPBAP custom server installer that downloads the full server/game package from a GitHub Release.
-GenericModule.Meta.DisplayImageSource=steam:2226280
-GenericModule.Meta.OS=Linux
-GenericModule.Meta.ConfigManifest=bapcustomservergithubconfig.json
-GenericModule.Meta.MetaConfigManifest=bapcustomservergithubmetaconfig.json
-GenericModule.Meta.PortManifest=bapcustomservergithubports.json
-GenericModule.Meta.ConfigRoot=bapcustomservergithub.kvp
-GenericModule.Meta.Author=Sonic0810
-GenericModule.Meta.URL=https://github.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates
-GenericModule.Meta.Prefix=BAPBAP
-GenericModule.Meta.Arch=x86_64
-GenericModule.Meta.ContainerSupport=Both
-GenericModule.Meta.MinAMPVersion=
-GenericModule.Meta.SpecificDockerImage=
-GenericModule.Meta.NoCommercialUsage=False
-GenericModule.Meta.ConfigReleaseState=Stable
+Meta.DisplayName=BAPBAP Custom Server GitHub AutoInstall
+Meta.Description=Linux web-panel-safe BAPBAP custom server installer that downloads the full server/game package from a GitHub Release.
+Meta.OS=Linux
+Meta.AarchSupport=Unsupported
+Meta.Arch=x86_64
+Meta.Author=Sonic0810
+Meta.URL=https://github.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates
+Meta.DisplayImageSource=steam:2226280
+Meta.EndpointURIFormat=http://{ip}:{GenericModule.App.Ports.$ApplicationPort1}
+Meta.ConfigManifest=bapcustomservergithubconfig.json
+Meta.MetaConfigManifest=bapcustomservergithubmetaconfig.json
+Meta.ConfigRoot=bapcustomservergithub.kvp
+Meta.MinAMPVersion=2.5.1.8
+Meta.ConfigReleaseState=Stable
+Meta.NoCommercialUsage=False
+Meta.ConfigVersion=2
+Meta.AppConfigId=44e7d745-1fbc-4db3-b328-69bbf7178a21
+Meta.Prefix=BAPBAP
+Meta.ContainerSupport=Both
 
+App.DisplayName=BAPBAP Custom Server
+App.RootDir=./BapCustomServer/
+App.BaseDirectory=./BapCustomServer/
+App.ExecutableLinux=/bin/sh
+App.WorkingDir=.
+App.CommandLineArgs=./amp-webpanel-start.sh "http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}"
+App.UseLinuxIOREDIR=False
+App.AppSettings={}
+App.EnvironmentVariables={}
+App.CommandLineParameterFormat=--{0} {1}
+App.CommandLineParameterDelimiter=
+App.ExitMethod=OS_CLOSE
+App.ExitTimeout=30
+App.HasWriteableConsole=False
+App.HasReadableConsole=True
+App.SupportsLiveSettingsChanges=False
+App.ForceIPBinding=False
+App.SupportsIPv6=False
+App.ApplicationIPBinding=0.0.0.0
+App.Ports=@IncludeJson[bapcustomservergithubports.json]
+App.AdminPortRef=ApplicationPort1
+App.PrimaryApplicationPortRef=ApplicationPort1
+App.MaxUsers=64
+App.AdminMethod=STDIO
 App.UpdateSources=@IncludeJson[bapcustomservergithubupdates.json]
+App.PreStartStages=[]
+App.UserActions=[]
+App.ForceUpdate=False
+App.Compatibility=None
+App.RapidStartup=False
+App.SmartExcludeExemptions=["*.json","*.log","*.jsonl"]
+App.SmartExcludeSupported=True
+App.DumpFullChildProcessTree=True
+App.ApplicationReadyMode=RegexMatch
 App.AdditionalContainerVolumes=
 App.AdditionalContainerEnv=
+App.OnlineRegex=^\[Analytics\] Player joined: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
+App.OfflineRegex=^\[Analytics\] Player left: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
+App.UserNameMatchGroup=Username
+App.UserIDMatchGroup=UID
+App.UseUUIDForUserIdentification=False
 
-GenericModule.App.OnlineRegex=^\[Analytics\] Player joined: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
-GenericModule.App.OfflineRegex=^\[Analytics\] Player left: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
-GenericModule.App.UserNameMatchGroup=Username
-GenericModule.App.UserIDMatchGroup=UID
-GenericModule.App.UseUUIDForUserIdentification=False
-GenericModule.App.MaxUsers=64
-GenericModule.App.HasReadableConsole=True
-GenericModule.App.HasWriteableConsole=False
-GenericModule.App.SupportsLiveSettingsChanges=False
+Console.FilterMatchRegex=
+Console.FilterMatchReplacement=
+Console.ThrowawayMessageRegex=
+Console.AppReadyRegex=Now listening on:
+Console.UserJoinRegex=^\[Analytics\] Player joined: (?<username>[^ ]+) \(accountId=(?<accountId>[^)]+)\)$
+Console.UserLeaveRegex=^\[Analytics\] Player left: (?<username>[^ ]+) \(accountId=(?<accountId>[^)]+)\)$
+Console.UserChatRegex=
+Console.UpdateAvailableRegex=
+Console.PreConnectRegex=
+Console.ConnectIPRegex=
+Console.MetricsRegex=
+Console.HideFromConsoleRegex=
+Console.SuppressLogAtStart=False
+Console.UserActions={}
+
+Limits.SleepMode=False
+Limits.SleepOnStart=False
+Limits.AutoRetryCount=2
 
 CustomServer.PublicBaseUrl=http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}
 CustomServer.PublicGameHost={{$ApplicationIPBinding}}
@@ -37,10 +85,10 @@ CustomServer.LaunchGameServers=true
 CustomServer.RequireGameServerBootstrap=true
 CustomServer.GameExecutablePath=./game/bapbap.exe
 CustomServer.GameWorkingDirectory=./game
-CustomServer.GameLauncherPath=/usr/bin/env
-CustomServer.GameLauncherArguments=WINEDLLOVERRIDES=version=n,b /usr/bin/xvfb-run -a /usr/bin/wine "{gameExecutable}" {gameArguments}
+CustomServer.GameLauncherPath=./start-match.sh
+CustomServer.GameLauncherArguments="{gameExecutable}" {gameArguments}
 CustomServer.AdditionalGameArguments=--melonloader.agfoffline --bapcustom-use-proxy=false --bapcustom-show-ui=false
-CustomServer.GameServerReadyTimeoutSeconds=150
+CustomServer.GameServerReadyTimeoutSeconds=240
 CustomServer.BaseWsPort={{$ApplicationPort2}}
 CustomServer.BaseKcpPort={{$ApplicationPort3}}
 CustomServer.BaseTcpPort={{$ApplicationPort4}}
@@ -53,6 +101,7 @@ CustomServer.MatchmakingQueue.QueueTimerSeconds=30
 CustomServer.MatchmakingQueue.MinPlayersToStart=1
 CustomServer.MatchmakingQueue.DefaultBotCount=4
 CustomServer.MatchmakingQueue.DefaultBotDifficulty=1
+CustomServer.MatchmakingQueue.DefaultMapId=1
 CustomServer.MatchDefaults.CharSelectMillis=20000
 CustomServer.MatchDefaults.SpawnSelectMillis=10000
 CustomServer.MatchDefaults.RandomizeMapPerMatch=true
@@ -100,7 +149,6 @@ CustomServer.Network.SendRate=60
 CustomServer.Network.KcpSendWindow=4096
 CustomServer.Network.DisableInterpolationForProjectiles=true
 
-CustomServer.Friends.Enabled=true
 CustomServer.Friends.MaxFriendsPerPlayer=100
 CustomServer.Economy.StartingGold=1000
 CustomServer.Economy.WinGold=500
