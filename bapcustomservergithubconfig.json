@@ -28,7 +28,7 @@
     "Subcategory": "Match Host",
     "ParamFieldName": "CustomServer.LaunchGameServers",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Require Bootstrap",
@@ -39,7 +39,7 @@
     "Subcategory": "Match Host",
     "ParamFieldName": "CustomServer.RequireGameServerBootstrap",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Game Executable Path",
@@ -152,17 +152,17 @@
     "ParamFieldName": "CustomServer.MatchmakingQueue.DefaultGameMode",
     "DefaultValue": "3",
     "EnumValues": {
-      "Warmup": "0",
-      "Mini Duos": "1",
-      "Mini Trios": "2",
-      "Solos": "3",
-      "Duos": "4",
-      "Trios": "5",
-      "Ranked Duos": "6",
-      "Ranked Trios": "7",
-      "Event": "8",
-      "Free For All": "9",
-      "Custom Game": "10"
+      "0": "Warmup",
+      "1": "Mini Duos",
+      "2": "Mini Trios",
+      "3": "Solos",
+      "4": "Duos",
+      "5": "Trios",
+      "6": "Ranked Duos",
+      "7": "Ranked Trios",
+      "8": "Event",
+      "9": "Free For All",
+      "10": "Custom Game"
     }
   },
   {
@@ -174,7 +174,7 @@
     "Subcategory": "Game Mode",
     "ParamFieldName": "CustomServer.MatchmakingQueue.DefaultTeamSize",
     "DefaultValue": "1",
-    "EnumValues": { "1 (Solo)": "1", "2 (Duo)": "2", "3 (Trio)": "3", "4": "4" }
+    "EnumValues": { "1": "1 (Solo)", "2": "2 (Duo)", "3": "3 (Trio)", "4": "4" }
   },
   {
     "DisplayName": "Default Max Teams",
@@ -225,7 +225,7 @@
     "Subcategory": "Bots",
     "ParamFieldName": "CustomServer.MatchmakingQueue.DefaultBotDifficulty",
     "DefaultValue": "1",
-    "EnumValues": { "Easy": "0", "Normal": "1", "Medium": "2", "Hard": "3", "Expert": "4" }
+    "EnumValues": { "0": "Easy", "1": "Normal", "2": "Medium", "3": "Hard", "4": "Expert" }
   },
   {
     "DisplayName": "Char Select Time (ms)",
@@ -257,7 +257,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableAnna",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Bishop",
@@ -268,7 +268,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableBishop",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Celeste",
@@ -279,7 +279,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableCeleste",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Chuck",
@@ -290,7 +290,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableChuck",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Froggy",
@@ -301,7 +301,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableFroggy",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Jiro",
@@ -312,7 +312,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableJiro",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Kate",
@@ -323,7 +323,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableKate",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Kiddo",
@@ -334,7 +334,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableKiddo",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Kitsu",
@@ -345,7 +345,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableKitsu",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Rocky",
@@ -356,7 +356,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableRocky",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Sashimi",
@@ -367,7 +367,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableSashimi",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Skinny",
@@ -378,7 +378,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableSkinny",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Sofia",
@@ -389,7 +389,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableSofia",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Teevee",
@@ -400,7 +400,7 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableTeevee",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Enable Zook",
@@ -411,52 +411,52 @@
     "Subcategory": "Roster",
     "ParamFieldName": "CustomServer.Roster.EnableZook",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
 
   {
-    "DisplayName": "Enable Map: Tireclub",
-    "Description": "Include Tireclub (mapId 1) in the random map pool.",
+    "DisplayName": "Enable Map ID 1 (Tire Club)",
+    "Description": "Include map ID 1 in the random map pool. Confirmed in playtest as Tire Club.",
     "FieldName": "EnableMapTireclub",
     "InputType": "checkbox",
     "Category": "BAPBAP - Maps",
     "Subcategory": "Map Pool",
     "ParamFieldName": "CustomServer.MapPool.EnableMapTireclub",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
-    "DisplayName": "Enable Map: Bazaarcity",
-    "Description": "Include Bazaarcity (mapId 2) in the random map pool.",
+    "DisplayName": "Enable Map ID 2",
+    "Description": "Include map ID 2 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
     "FieldName": "EnableMapBazaarcity",
     "InputType": "checkbox",
     "Category": "BAPBAP - Maps",
     "Subcategory": "Map Pool",
     "ParamFieldName": "CustomServer.MapPool.EnableMapBazaarcity",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
-    "DisplayName": "Enable Map: Bonsai",
-    "Description": "Include Bonsai (mapId 3) in the random map pool.",
+    "DisplayName": "Enable Map ID 3",
+    "Description": "Include map ID 3 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
     "FieldName": "EnableMapBonsai",
     "InputType": "checkbox",
     "Category": "BAPBAP - Maps",
     "Subcategory": "Map Pool",
     "ParamFieldName": "CustomServer.MapPool.EnableMapBonsai",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
-    "DisplayName": "Enable Map: Sunset",
-    "Description": "Include map 4 (Sunset / Hub depending on build) in the random map pool.",
+    "DisplayName": "Enable Map ID 4",
+    "Description": "Include map ID 4 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
     "FieldName": "EnableMapSunset",
     "InputType": "checkbox",
     "Category": "BAPBAP - Maps",
     "Subcategory": "Map Pool",
     "ParamFieldName": "CustomServer.MapPool.EnableMapSunset",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Randomize Map Per Match",
@@ -467,7 +467,7 @@
     "Subcategory": "Map Pool",
     "ParamFieldName": "CustomServer.MatchDefaults.RandomizeMapPerMatch",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
 
   {
@@ -479,7 +479,7 @@
     "Subcategory": "Master",
     "ParamFieldName": "CustomServer.Unlocks.UnlockEverything",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Unlock All Skins",
@@ -490,7 +490,7 @@
     "Subcategory": "Per Category",
     "ParamFieldName": "CustomServer.Unlocks.UnlockAllSkins",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Unlock All Banners",
@@ -501,7 +501,7 @@
     "Subcategory": "Per Category",
     "ParamFieldName": "CustomServer.Unlocks.UnlockAllBanners",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Unlock All Emotes",
@@ -512,7 +512,7 @@
     "Subcategory": "Per Category",
     "ParamFieldName": "CustomServer.Unlocks.UnlockAllEmotes",
     "DefaultValue": "false",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Unlock All Mastery Badges",
@@ -523,7 +523,7 @@
     "Subcategory": "Per Category",
     "ParamFieldName": "CustomServer.Unlocks.UnlockAllMasteryBadges",
     "DefaultValue": "false",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Unlock All Tombstones",
@@ -534,7 +534,7 @@
     "Subcategory": "Per Category",
     "ParamFieldName": "CustomServer.Unlocks.UnlockAllTombstones",
     "DefaultValue": "false",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Grant All Currencies",
@@ -545,7 +545,7 @@
     "Subcategory": "Per Category",
     "ParamFieldName": "CustomServer.Unlocks.GrantAllCurrencies",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Currency Balance",
@@ -568,30 +568,30 @@
     "ParamFieldName": "CustomServer.ShopSlots.Slot1AssetId",
     "DefaultValue": "500001",
     "EnumValues": {
-      "(None)": "0",
-      "Banner: Default (500121)": "500121",
-      "Banner: 500001": "500001",
-      "Banner: 500002": "500002",
-      "Banner: 500003": "500003",
-      "Banner: 500004": "500004",
-      "Banner: 500005": "500005",
-      "Banner: 500006": "500006",
-      "Banner: 500010": "500010",
-      "Skin: Kitsu (300018)": "300018",
-      "Skin: Anna (300000)": "300000",
-      "Skin: Chuck (300007)": "300007",
-      "Skin: Sashimi (300020)": "300020",
-      "Skin: Kiddo (300017)": "300017",
-      "Skin: Zook (300026)": "300026",
-      "Skin: Skinny (300021)": "300021",
-      "Skin: Froggy (300013)": "300013",
-      "Skin: Teevee (300025)": "300025",
-      "Skin: Sofia (300023)": "300023",
-      "Skin: Jiro (300015)": "300015",
-      "Skin: Bishop (300003)": "300003",
-      "Skin: Celeste (300005)": "300005",
-      "Skin: Kate (300016)": "300016",
-      "Skin: Rocky (300019)": "300019"
+      "0": "(None)",
+      "500121": "Banner: Default (500121)",
+      "500001": "Banner: 500001",
+      "500002": "Banner: 500002",
+      "500003": "Banner: 500003",
+      "500004": "Banner: 500004",
+      "500005": "Banner: 500005",
+      "500006": "Banner: 500006",
+      "500010": "Banner: 500010",
+      "300018": "Skin: Kitsu (300018)",
+      "300000": "Skin: Anna (300000)",
+      "300007": "Skin: Chuck (300007)",
+      "300020": "Skin: Sashimi (300020)",
+      "300017": "Skin: Kiddo (300017)",
+      "300026": "Skin: Zook (300026)",
+      "300021": "Skin: Skinny (300021)",
+      "300013": "Skin: Froggy (300013)",
+      "300025": "Skin: Teevee (300025)",
+      "300023": "Skin: Sofia (300023)",
+      "300015": "Skin: Jiro (300015)",
+      "300003": "Skin: Bishop (300003)",
+      "300005": "Skin: Celeste (300005)",
+      "300016": "Skin: Kate (300016)",
+      "300019": "Skin: Rocky (300019)"
     }
   },
   {
@@ -614,27 +614,27 @@
     "ParamFieldName": "CustomServer.ShopSlots.Slot2AssetId",
     "DefaultValue": "500005",
     "EnumValues": {
-      "(None)": "0",
-      "Banner: Default (500121)": "500121",
-      "Banner: 500001": "500001",
-      "Banner: 500002": "500002",
-      "Banner: 500005": "500005",
-      "Banner: 500010": "500010",
-      "Skin: Kitsu (300018)": "300018",
-      "Skin: Anna (300000)": "300000",
-      "Skin: Chuck (300007)": "300007",
-      "Skin: Sashimi (300020)": "300020",
-      "Skin: Kiddo (300017)": "300017",
-      "Skin: Zook (300026)": "300026",
-      "Skin: Skinny (300021)": "300021",
-      "Skin: Froggy (300013)": "300013",
-      "Skin: Teevee (300025)": "300025",
-      "Skin: Sofia (300023)": "300023",
-      "Skin: Jiro (300015)": "300015",
-      "Skin: Bishop (300003)": "300003",
-      "Skin: Celeste (300005)": "300005",
-      "Skin: Kate (300016)": "300016",
-      "Skin: Rocky (300019)": "300019"
+      "0": "(None)",
+      "500121": "Banner: Default (500121)",
+      "500001": "Banner: 500001",
+      "500002": "Banner: 500002",
+      "500005": "Banner: 500005",
+      "500010": "Banner: 500010",
+      "300018": "Skin: Kitsu (300018)",
+      "300000": "Skin: Anna (300000)",
+      "300007": "Skin: Chuck (300007)",
+      "300020": "Skin: Sashimi (300020)",
+      "300017": "Skin: Kiddo (300017)",
+      "300026": "Skin: Zook (300026)",
+      "300021": "Skin: Skinny (300021)",
+      "300013": "Skin: Froggy (300013)",
+      "300025": "Skin: Teevee (300025)",
+      "300023": "Skin: Sofia (300023)",
+      "300015": "Skin: Jiro (300015)",
+      "300003": "Skin: Bishop (300003)",
+      "300005": "Skin: Celeste (300005)",
+      "300016": "Skin: Kate (300016)",
+      "300019": "Skin: Rocky (300019)"
     }
   },
   {
@@ -657,15 +657,15 @@
     "ParamFieldName": "CustomServer.ShopSlots.Slot3AssetId",
     "DefaultValue": "500010",
     "EnumValues": {
-      "(None)": "0",
-      "Banner: 500001": "500001",
-      "Banner: 500002": "500002",
-      "Banner: 500005": "500005",
-      "Banner: 500010": "500010",
-      "Banner: Default (500121)": "500121",
-      "Skin: Anna (300000)": "300000",
-      "Skin: Chuck (300007)": "300007",
-      "Skin: Kitsu (300018)": "300018"
+      "0": "(None)",
+      "500001": "Banner: 500001",
+      "500002": "Banner: 500002",
+      "500005": "Banner: 500005",
+      "500010": "Banner: 500010",
+      "500121": "Banner: Default (500121)",
+      "300000": "Skin: Anna (300000)",
+      "300007": "Skin: Chuck (300007)",
+      "300018": "Skin: Kitsu (300018)"
     }
   },
   {
@@ -688,13 +688,13 @@
     "ParamFieldName": "CustomServer.ShopSlots.FreebieAssetId",
     "DefaultValue": "500002",
     "EnumValues": {
-      "(None)": "0",
-      "Banner: 500001": "500001",
-      "Banner: 500002": "500002",
-      "Banner: 500003": "500003",
-      "Banner: 500005": "500005",
-      "Banner: 500010": "500010",
-      "Banner: Default (500121)": "500121"
+      "0": "(None)",
+      "500001": "Banner: 500001",
+      "500002": "Banner: 500002",
+      "500003": "Banner: 500003",
+      "500005": "Banner: 500005",
+      "500010": "Banner: 500010",
+      "500121": "Banner: Default (500121)"
     }
   },
 
@@ -707,7 +707,7 @@
     "Subcategory": "Network Tuning",
     "ParamFieldName": "CustomServer.Network.Enabled",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
   {
     "DisplayName": "Mirror Send Rate (Hz)",
@@ -718,7 +718,7 @@
     "Subcategory": "Network Tuning",
     "ParamFieldName": "CustomServer.Network.SendRate",
     "DefaultValue": "60",
-    "EnumValues": { "20 Hz (low bandwidth)": "20", "30 Hz (default)": "30", "60 Hz (smooth)": "60", "120 Hz (LAN)": "120" }
+    "EnumValues": { "20": "20 Hz (low bandwidth)", "30": "30 Hz (default)", "60": "60 Hz (smooth)", "120": "120 Hz (LAN)" }
   },
   {
     "DisplayName": "KCP Send Window",
@@ -739,7 +739,7 @@
     "Subcategory": "Network Tuning",
     "ParamFieldName": "CustomServer.Network.DisableInterpolationForProjectiles",
     "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
+    "EnumValues": { "true": "True", "false": "False" }
   },
 
   {
@@ -747,7 +747,7 @@
     "Description": "Maximum number of friends a single account can have.",
     "FieldName": "MaxFriendsPerPlayer",
     "InputType": "number",
-    "Category": "BAPBAP - Friends & Economy",
+    "Category": "BAPBAP - Friends and Economy",
     "Subcategory": "Friends",
     "ParamFieldName": "CustomServer.Friends.MaxFriendsPerPlayer",
     "DefaultValue": "100"
@@ -757,7 +757,7 @@
     "Description": "Gold every NEW account gets on first login.",
     "FieldName": "StartingGold",
     "InputType": "number",
-    "Category": "BAPBAP - Friends & Economy",
+    "Category": "BAPBAP - Friends and Economy",
     "Subcategory": "Economy",
     "ParamFieldName": "CustomServer.Economy.StartingGold",
     "DefaultValue": "1000"
@@ -767,7 +767,7 @@
     "Description": "Gold awarded for winning a match.",
     "FieldName": "WinGold",
     "InputType": "number",
-    "Category": "BAPBAP - Friends & Economy",
+    "Category": "BAPBAP - Friends and Economy",
     "Subcategory": "Economy",
     "ParamFieldName": "CustomServer.Economy.WinGold",
     "DefaultValue": "500"
@@ -777,7 +777,7 @@
     "Description": "Gold awarded per kill.",
     "FieldName": "KillGold",
     "InputType": "number",
-    "Category": "BAPBAP - Friends & Economy",
+    "Category": "BAPBAP - Friends and Economy",
     "Subcategory": "Economy",
     "ParamFieldName": "CustomServer.Economy.KillGold",
     "DefaultValue": "50"
@@ -787,7 +787,7 @@
     "Description": "Gold awarded just for finishing a match.",
     "FieldName": "ParticipationGold",
     "InputType": "number",
-    "Category": "BAPBAP - Friends & Economy",
+    "Category": "BAPBAP - Friends and Economy",
     "Subcategory": "Economy",
     "ParamFieldName": "CustomServer.Economy.ParticipationGold",
     "DefaultValue": "25"
