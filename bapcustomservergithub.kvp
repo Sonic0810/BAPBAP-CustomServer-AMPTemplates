@@ -1,3 +1,22 @@
+GenericModule.Meta.AppConfigId=44e7d745-1fbc-4db3-b328-69bbf7178a21
+GenericModule.Meta.DisplayName=BAPBAP Custom Server GitHub AutoInstall
+GenericModule.Meta.Description=Linux web-panel-safe BAPBAP custom server installer that downloads the full server/game package from a GitHub Release.
+GenericModule.Meta.DisplayImageSource=steam:2226280
+GenericModule.Meta.OS=Linux
+GenericModule.Meta.ConfigManifest=bapcustomservergithubconfig.json
+GenericModule.Meta.MetaConfigManifest=bapcustomservergithubmetaconfig.json
+GenericModule.Meta.PortManifest=bapcustomservergithubports.json
+GenericModule.Meta.ConfigRoot=bapcustomservergithub.kvp
+GenericModule.Meta.Author=Sonic0810
+GenericModule.Meta.URL=https://github.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates
+GenericModule.Meta.Prefix=BAPBAP
+GenericModule.Meta.Arch=x86_64
+GenericModule.Meta.ContainerSupport=Both
+GenericModule.Meta.MinAMPVersion=
+GenericModule.Meta.SpecificDockerImage=
+GenericModule.Meta.NoCommercialUsage=False
+GenericModule.Meta.ConfigReleaseState=Stable
+
 App.UpdateSources=@IncludeJson[bapcustomservergithubupdates.json]
 App.AdditionalContainerVolumes=
 App.AdditionalContainerEnv=
