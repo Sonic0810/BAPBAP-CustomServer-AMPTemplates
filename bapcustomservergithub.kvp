@@ -21,6 +21,16 @@ App.UpdateSources=@IncludeJson[bapcustomservergithubupdates.json]
 App.AdditionalContainerVolumes=
 App.AdditionalContainerEnv=
 
+GenericModule.App.OnlineRegex=^\[Analytics\] Player joined: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
+GenericModule.App.OfflineRegex=^\[Analytics\] Player left: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
+GenericModule.App.UserNameMatchGroup=Username
+GenericModule.App.UserIDMatchGroup=UID
+GenericModule.App.UseUUIDForUserIdentification=False
+GenericModule.App.MaxUsers=64
+GenericModule.App.HasReadableConsole=True
+GenericModule.App.HasWriteableConsole=False
+GenericModule.App.SupportsLiveSettingsChanges=False
+
 CustomServer.PublicBaseUrl=http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}
 CustomServer.PublicGameHost={{$ApplicationIPBinding}}
 CustomServer.LaunchGameServers=true
@@ -100,3 +110,10 @@ CustomServer.Economy.ParticipationGold=25
 CustomServer.Admin.ApiToken=
 CustomServer.Admin.AdminAccountIdsCsv=
 CustomServer.Admin.BannedAccountIdsCsv=
+
+CustomServer.Analytics.Enabled=true
+CustomServer.Analytics.PlayerJoinRegex=^\[Analytics\] Player joined: (?<Username>[^ ]+) \(accountId=(?<AccountId>[^)]+)\)$
+CustomServer.Analytics.PlayerLeaveRegex=^\[Analytics\] Player left: (?<Username>[^ ]+) \(accountId=(?<AccountId>[^)]+)\)$
+CustomServer.Analytics.MatchStartRegex=^\[Analytics\] Match started: (?<GameId>[^ ]+) mapId=(?<MapId>\d+) players=(?<PlayerCount>\d+)$
+CustomServer.Analytics.MatchEndRegex=^\[Analytics\] Match ended: (?<GameId>.+)$
+CustomServer.Analytics.ChatRegex=
