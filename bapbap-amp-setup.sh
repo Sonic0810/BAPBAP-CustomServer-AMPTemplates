@@ -47,8 +47,8 @@ if [ ! -d "$INST_DIR" ]; then
   exit 1
 fi
 
-if ! command -v unzip >/dev/null 2>&1; then
-  echo "!! 'unzip' is not installed. Install it (apt-get install unzip) and re-run."
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "!! 'python3' is not installed. Install it (apt-get install python3) and re-run."
   exit 1
 fi
 
@@ -64,8 +64,26 @@ ts="$(date +%Y%m%d-%H%M%S)"
 echo "==> Downloading server bundle (~585 MB) from GitHub Releases"
 curl -fL "$BUNDLE_URL" -o "$TMP_ZIP" --progress-bar
 
-echo "==> Extracting into $INST_DIR"
-unzip -oq "$TMP_ZIP" -d "$INST_DIR"
+echo "==> Extracting into $INST_DIR (using python3 — handles Windows backslash paths)"
+python3 - <<PYEOF
+import os, sys, zipfile
+src = "$TMP_ZIP"
+dst = "$INST_DIR"
+count = 0
+with zipfile.ZipFile(src) as z:
+    for info in z.infolist():
+        # Windows-built zips use backslash; convert to POSIX
+        info.filename = info.filename.replace("\\\\", "/")
+        if info.filename.endswith("/"):
+            os.makedirs(os.path.join(dst, info.filename), exist_ok=True)
+        else:
+            target = os.path.join(dst, info.filename)
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            with z.open(info) as src_f, open(target, "wb") as out_f:
+                out_f.write(src_f.read())
+            count += 1
+print(f"    extracted {count} files")
+PYEOF
 
 echo "==> Stripping CRLF from shell scripts (safe even if already LF)"
 for f in "$INST_DIR/BapCustomServer"/*.sh; do
