@@ -1,4 +1,4 @@
-[
+﻿[
     {
         "DisplayName":  "Public Base URL",
         "Description":  "External URL clients use for socket discovery and WebSocket lobby traffic.",
@@ -6,7 +6,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Endpoints",
-        "ParamFieldName":  "CustomServer.PublicBaseUrl",
+        "ParamFieldName":  "$.CustomServer.PublicBaseUrl",
         "DefaultValue":  "http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}"
     },
     {
@@ -16,7 +16,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Endpoints",
-        "ParamFieldName":  "CustomServer.PublicGameHost",
+        "ParamFieldName":  "$.CustomServer.PublicGameHost",
         "DefaultValue":  "{{$ApplicationIPBinding}}"
     },
     {
@@ -26,7 +26,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.LaunchGameServers",
+        "ParamFieldName":  "$.CustomServer.LaunchGameServers",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -40,7 +40,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.RequireGameServerBootstrap",
+        "ParamFieldName":  "$.CustomServer.RequireGameServerBootstrap",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -54,7 +54,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.GameExecutablePath",
+        "ParamFieldName":  "$.CustomServer.GameExecutablePath",
         "DefaultValue":  "./game/bapbap.exe"
     },
     {
@@ -64,7 +64,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.GameWorkingDirectory",
+        "ParamFieldName":  "$.CustomServer.GameWorkingDirectory",
         "DefaultValue":  "./game"
     },
     {
@@ -74,7 +74,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.GameLauncherPath",
+        "ParamFieldName":  "$.CustomServer.GameLauncherPath",
         "DefaultValue":  "/usr/bin/env"
     },
     {
@@ -84,7 +84,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.GameLauncherArguments",
+        "ParamFieldName":  "$.CustomServer.GameLauncherArguments",
         "DefaultValue":  "WINEDLLOVERRIDES=version=n,b /usr/bin/xvfb-run -a /usr/bin/wine \"{gameExecutable}\" {gameArguments}"
     },
     {
@@ -94,7 +94,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.AdditionalGameArguments",
+        "ParamFieldName":  "$.CustomServer.AdditionalGameArguments",
         "DefaultValue":  "--melonloader.agfoffline --bapcustom-use-proxy=false --bapcustom-show-ui=false"
     },
     {
@@ -104,7 +104,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
-        "ParamFieldName":  "CustomServer.GameServerReadyTimeoutSeconds",
+        "ParamFieldName":  "$.CustomServer.GameServerReadyTimeoutSeconds",
         "DefaultValue":  "150"
     },
     {
@@ -114,7 +114,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Ports",
-        "ParamFieldName":  "CustomServer.BaseWsPort",
+        "ParamFieldName":  "$.CustomServer.BaseWsPort",
         "DefaultValue":  "{{$ApplicationPort2}}"
     },
     {
@@ -124,7 +124,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Ports",
-        "ParamFieldName":  "CustomServer.BaseKcpPort",
+        "ParamFieldName":  "$.CustomServer.BaseKcpPort",
         "DefaultValue":  "{{$ApplicationPort3}}"
     },
     {
@@ -134,7 +134,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Ports",
-        "ParamFieldName":  "CustomServer.BaseTcpPort",
+        "ParamFieldName":  "$.CustomServer.BaseTcpPort",
         "DefaultValue":  "{{$ApplicationPort4}}"
     },
     {
@@ -144,7 +144,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Ports",
-        "ParamFieldName":  "CustomServer.BaseHttpPort",
+        "ParamFieldName":  "$.CustomServer.BaseHttpPort",
         "DefaultValue":  "{{$ApplicationPort5}}"
     },
     {
@@ -154,7 +154,7 @@
         "InputType":  "enum",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Game Mode",
-        "ParamFieldName":  "CustomServer.MatchmakingQueue.DefaultGameMode",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultGameMode",
         "DefaultValue":  "3",
         "EnumValues":  {
                            "0":  "Warmup",
@@ -177,7 +177,7 @@
         "InputType":  "enum",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Game Mode",
-        "ParamFieldName":  "CustomServer.MatchmakingQueue.DefaultTeamSize",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultTeamSize",
         "DefaultValue":  "1",
         "EnumValues":  {
                            "1":  "1 (Solo)",
@@ -193,7 +193,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Game Mode",
-        "ParamFieldName":  "CustomServer.MatchmakingQueue.DefaultMaxTeams",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultMaxTeams",
         "DefaultValue":  "8"
     },
     {
@@ -203,7 +203,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Matchmaking",
-        "ParamFieldName":  "CustomServer.MatchmakingQueue.QueueTimerSeconds",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.QueueTimerSeconds",
         "DefaultValue":  "30"
     },
     {
@@ -213,7 +213,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Matchmaking",
-        "ParamFieldName":  "CustomServer.MatchmakingQueue.MinPlayersToStart",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.MinPlayersToStart",
         "DefaultValue":  "1"
     },
     {
@@ -223,7 +223,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Bots",
-        "ParamFieldName":  "CustomServer.MatchmakingQueue.DefaultBotCount",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultBotCount",
         "DefaultValue":  "4"
     },
     {
@@ -233,7 +233,7 @@
         "InputType":  "enum",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Bots",
-        "ParamFieldName":  "CustomServer.MatchmakingQueue.DefaultBotDifficulty",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultBotDifficulty",
         "DefaultValue":  "1",
         "EnumValues":  {
                            "0":  "Easy",
@@ -250,7 +250,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Timings",
-        "ParamFieldName":  "CustomServer.MatchDefaults.CharSelectMillis",
+        "ParamFieldName":  "$.CustomServer.MatchDefaults.CharSelectMillis",
         "DefaultValue":  "20000"
     },
     {
@@ -260,7 +260,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Match Defaults",
         "Subcategory":  "Timings",
-        "ParamFieldName":  "CustomServer.MatchDefaults.SpawnSelectMillis",
+        "ParamFieldName":  "$.CustomServer.MatchDefaults.SpawnSelectMillis",
         "DefaultValue":  "10000"
     },
     {
@@ -270,7 +270,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableAnna",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableAnna",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -284,7 +284,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableBishop",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableBishop",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -298,7 +298,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableCeleste",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableCeleste",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -312,7 +312,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableChuck",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableChuck",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -326,7 +326,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableFroggy",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableFroggy",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -340,7 +340,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableJiro",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableJiro",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -354,7 +354,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableKate",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableKate",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -368,7 +368,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableKiddo",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableKiddo",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -382,7 +382,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableKitsu",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableKitsu",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -396,7 +396,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableRocky",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableRocky",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -410,7 +410,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableSashimi",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableSashimi",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -424,7 +424,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableSkinny",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableSkinny",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -438,7 +438,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableSofia",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableSofia",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -452,7 +452,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableTeevee",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableTeevee",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -466,7 +466,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Characters",
         "Subcategory":  "Roster",
-        "ParamFieldName":  "CustomServer.Roster.EnableZook",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableZook",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -480,7 +480,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "CustomServer.MapPool.EnableMapTireclub",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapTireclub",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -494,7 +494,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "CustomServer.MapPool.EnableMapBazaarcity",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapBazaarcity",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -508,7 +508,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "CustomServer.MapPool.EnableMapBonsai",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapBonsai",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -522,7 +522,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "CustomServer.MapPool.EnableMapSunset",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapSunset",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -536,7 +536,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "CustomServer.MatchDefaults.RandomizeMapPerMatch",
+        "ParamFieldName":  "$.CustomServer.MatchDefaults.RandomizeMapPerMatch",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -550,7 +550,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Master",
-        "ParamFieldName":  "CustomServer.Unlocks.UnlockEverything",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockEverything",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -564,7 +564,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Per Category",
-        "ParamFieldName":  "CustomServer.Unlocks.UnlockAllSkins",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllSkins",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -578,7 +578,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Per Category",
-        "ParamFieldName":  "CustomServer.Unlocks.UnlockAllBanners",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllBanners",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -592,7 +592,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Per Category",
-        "ParamFieldName":  "CustomServer.Unlocks.UnlockAllEmotes",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllEmotes",
         "DefaultValue":  "false",
         "EnumValues":  {
                            "true":  "True",
@@ -606,7 +606,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Per Category",
-        "ParamFieldName":  "CustomServer.Unlocks.UnlockAllMasteryBadges",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllMasteryBadges",
         "DefaultValue":  "false",
         "EnumValues":  {
                            "true":  "True",
@@ -620,7 +620,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Per Category",
-        "ParamFieldName":  "CustomServer.Unlocks.UnlockAllTombstones",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllTombstones",
         "DefaultValue":  "false",
         "EnumValues":  {
                            "true":  "True",
@@ -634,7 +634,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Per Category",
-        "ParamFieldName":  "CustomServer.Unlocks.GrantAllCurrencies",
+        "ParamFieldName":  "$.CustomServer.Unlocks.GrantAllCurrencies",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -648,7 +648,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Unlocks",
         "Subcategory":  "Currency",
-        "ParamFieldName":  "CustomServer.Unlocks.CurrencyBalance",
+        "ParamFieldName":  "$.CustomServer.Unlocks.CurrencyBalance",
         "DefaultValue":  "999999"
     },
     {
@@ -658,7 +658,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Shop",
         "Subcategory":  "Slot 1",
-        "ParamFieldName":  "CustomServer.ShopSlots.Slot1AssetId",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot1AssetId",
         "DefaultValue":  "500001"
     },
     {
@@ -668,7 +668,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Shop",
         "Subcategory":  "Slot 1",
-        "ParamFieldName":  "CustomServer.ShopSlots.Slot1Price",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot1Price",
         "DefaultValue":  "100"
     },
     {
@@ -678,7 +678,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Shop",
         "Subcategory":  "Slot 2",
-        "ParamFieldName":  "CustomServer.ShopSlots.Slot2AssetId",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot2AssetId",
         "DefaultValue":  "500005"
     },
     {
@@ -688,7 +688,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Shop",
         "Subcategory":  "Slot 2",
-        "ParamFieldName":  "CustomServer.ShopSlots.Slot2Price",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot2Price",
         "DefaultValue":  "150"
     },
     {
@@ -698,7 +698,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Shop",
         "Subcategory":  "Slot 3",
-        "ParamFieldName":  "CustomServer.ShopSlots.Slot3AssetId",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot3AssetId",
         "DefaultValue":  "500010"
     },
     {
@@ -708,7 +708,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Shop",
         "Subcategory":  "Slot 3",
-        "ParamFieldName":  "CustomServer.ShopSlots.Slot3Price",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot3Price",
         "DefaultValue":  "200"
     },
     {
@@ -718,7 +718,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Shop",
         "Subcategory":  "Freebie",
-        "ParamFieldName":  "CustomServer.ShopSlots.FreebieAssetId",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.FreebieAssetId",
         "DefaultValue":  "500002"
     },
     {
@@ -728,7 +728,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Server Performance",
         "Subcategory":  "Network Tuning",
-        "ParamFieldName":  "CustomServer.Network.Enabled",
+        "ParamFieldName":  "$.CustomServer.Network.Enabled",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -742,7 +742,7 @@
         "InputType":  "enum",
         "Category":  "BAPBAP - Server Performance",
         "Subcategory":  "Network Tuning",
-        "ParamFieldName":  "CustomServer.Network.SendRate",
+        "ParamFieldName":  "$.CustomServer.Network.SendRate",
         "DefaultValue":  "60",
         "EnumValues":  {
                            "20":  "20 Hz (low bandwidth)",
@@ -758,7 +758,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Server Performance",
         "Subcategory":  "Network Tuning",
-        "ParamFieldName":  "CustomServer.Network.KcpSendWindow",
+        "ParamFieldName":  "$.CustomServer.Network.KcpSendWindow",
         "DefaultValue":  "4096"
     },
     {
@@ -768,7 +768,7 @@
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Server Performance",
         "Subcategory":  "Network Tuning",
-        "ParamFieldName":  "CustomServer.Network.DisableInterpolationForProjectiles",
+        "ParamFieldName":  "$.CustomServer.Network.DisableInterpolationForProjectiles",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -782,7 +782,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Friends and Economy",
         "Subcategory":  "Friends",
-        "ParamFieldName":  "CustomServer.Friends.MaxFriendsPerPlayer",
+        "ParamFieldName":  "$.CustomServer.Friends.MaxFriendsPerPlayer",
         "DefaultValue":  "100"
     },
     {
@@ -792,7 +792,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Friends and Economy",
         "Subcategory":  "Economy",
-        "ParamFieldName":  "CustomServer.Economy.StartingGold",
+        "ParamFieldName":  "$.CustomServer.Economy.StartingGold",
         "DefaultValue":  "1000"
     },
     {
@@ -802,7 +802,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Friends and Economy",
         "Subcategory":  "Economy",
-        "ParamFieldName":  "CustomServer.Economy.WinGold",
+        "ParamFieldName":  "$.CustomServer.Economy.WinGold",
         "DefaultValue":  "500"
     },
     {
@@ -812,7 +812,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Friends and Economy",
         "Subcategory":  "Economy",
-        "ParamFieldName":  "CustomServer.Economy.KillGold",
+        "ParamFieldName":  "$.CustomServer.Economy.KillGold",
         "DefaultValue":  "50"
     },
     {
@@ -822,7 +822,7 @@
         "InputType":  "number",
         "Category":  "BAPBAP - Friends and Economy",
         "Subcategory":  "Economy",
-        "ParamFieldName":  "CustomServer.Economy.ParticipationGold",
+        "ParamFieldName":  "$.CustomServer.Economy.ParticipationGold",
         "DefaultValue":  "25"
     },
     {
@@ -832,7 +832,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Access Control",
         "Subcategory":  "Admin",
-        "ParamFieldName":  "CustomServer.Admin.ApiToken",
+        "ParamFieldName":  "$.CustomServer.Admin.ApiToken",
         "DefaultValue":  ""
     },
     {
@@ -842,7 +842,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Access Control",
         "Subcategory":  "Admin",
-        "ParamFieldName":  "CustomServer.Admin.AdminAccountIdsCsv",
+        "ParamFieldName":  "$.CustomServer.Admin.AdminAccountIdsCsv",
         "DefaultValue":  ""
     },
     {
@@ -852,71 +852,7 @@
         "InputType":  "text",
         "Category":  "BAPBAP - Access Control",
         "Subcategory":  "Admin",
-        "ParamFieldName":  "CustomServer.Admin.BannedAccountIdsCsv",
-        "DefaultValue":  ""
-    },
-    {
-        "DisplayName":  "Analytics Enabled",
-        "Description":  "Emit [Analytics] log lines for player joins/leaves and match start/end so AMP can scrape them via regex. Required for the AMP Players + Matches graphs.",
-        "FieldName":  "AnalyticsEnabled",
-        "InputType":  "checkbox",
-        "Category":  "BAPBAP - Analytics",
-        "Subcategory":  "Logging",
-        "ParamFieldName":  "CustomServer.Analytics.Enabled",
-        "DefaultValue":  "true",
-        "EnumValues":  {
-                           "true":  "True",
-                           "false":  "False"
-                       }
-    },
-    {
-        "DisplayName":  "Player Join Pattern",
-        "Description":  "Regex AMP uses to detect player-join events in the server log. Must define named groups (?<Username>) and (?<AccountId>). Leave the default unless you customised the analytics log format.",
-        "FieldName":  "PlayerJoinPattern",
-        "InputType":  "text",
-        "Category":  "BAPBAP - Analytics",
-        "Subcategory":  "Player Tracking",
-        "ParamFieldName":  "CustomServer.Analytics.PlayerJoinRegex",
-        "DefaultValue":  "^\\[Analytics\\] Player joined: (?<Username>[^ ]+) \\(accountId=(?<AccountId>[^)]+)\\)$"
-    },
-    {
-        "DisplayName":  "Player Leave Pattern",
-        "Description":  "Regex AMP uses to detect player-leave events in the server log. Must define named groups (?<Username>) and (?<AccountId>).",
-        "FieldName":  "PlayerLeavePattern",
-        "InputType":  "text",
-        "Category":  "BAPBAP - Analytics",
-        "Subcategory":  "Player Tracking",
-        "ParamFieldName":  "CustomServer.Analytics.PlayerLeaveRegex",
-        "DefaultValue":  "^\\[Analytics\\] Player left: (?<Username>[^ ]+) \\(accountId=(?<AccountId>[^)]+)\\)$"
-    },
-    {
-        "DisplayName":  "Match Start Pattern",
-        "Description":  "Regex used to detect a match-start event for the AMP match-count graph. Must define named groups (?<GameId>), (?<MapId>) and (?<PlayerCount>).",
-        "FieldName":  "MatchStartPattern",
-        "InputType":  "text",
-        "Category":  "BAPBAP - Analytics",
-        "Subcategory":  "Match Tracking",
-        "ParamFieldName":  "CustomServer.Analytics.MatchStartRegex",
-        "DefaultValue":  "^\\[Analytics\\] Match started: (?<GameId>[^ ]+) mapId=(?<MapId>\\d+) players=(?<PlayerCount>\\d+)$"
-    },
-    {
-        "DisplayName":  "Match End Pattern",
-        "Description":  "Regex used to detect a match-end event for the AMP match-count graph. Must define a named (?<GameId>) group.",
-        "FieldName":  "MatchEndPattern",
-        "InputType":  "text",
-        "Category":  "BAPBAP - Analytics",
-        "Subcategory":  "Match Tracking",
-        "ParamFieldName":  "CustomServer.Analytics.MatchEndRegex",
-        "DefaultValue":  "^\\[Analytics\\] Match ended: (?<GameId>.+)$"
-    },
-    {
-        "DisplayName":  "Chat Message Pattern",
-        "Description":  "Optional regex used to scrape in-game chat lines into the AMP chat tab. Leave empty to disable chat scraping.",
-        "FieldName":  "ChatMessagePattern",
-        "InputType":  "text",
-        "Category":  "BAPBAP - Analytics",
-        "Subcategory":  "Chat",
-        "ParamFieldName":  "CustomServer.Analytics.ChatRegex",
+        "ParamFieldName":  "$.CustomServer.Admin.BannedAccountIdsCsv",
         "DefaultValue":  ""
     }
 ]

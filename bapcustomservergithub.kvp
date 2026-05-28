@@ -10,20 +10,20 @@ Meta.EndpointURIFormat=http://{ip}:{GenericModule.App.Ports.$ApplicationPort1}
 Meta.ConfigManifest=bapcustomservergithubconfig.json
 Meta.MetaConfigManifest=bapcustomservergithubmetaconfig.json
 Meta.ConfigRoot=bapcustomservergithub.kvp
-Meta.MinAMPVersion=2.5.1.8
+Meta.MinAMPVersion=2.6.2.6
 Meta.ConfigReleaseState=Stable
 Meta.NoCommercialUsage=False
-Meta.ConfigVersion=3
+Meta.ConfigVersion=4
 Meta.AppConfigId=44e7d745-1fbc-4db3-b328-69bbf7178a21
 Meta.Prefix=BAPBAP
-Meta.ContainerSupport=Both
+Meta.ContainerPolicy=Supported
 
 App.DisplayName=BAPBAP Custom Server
 App.RootDir=./BapCustomServer/
 App.BaseDirectory=./BapCustomServer/
 App.ExecutableLinux=/bin/sh
 App.WorkingDir=.
-App.CommandLineArgs=./amp-webpanel-start.sh "http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}"
+App.CommandLineArgs=./amp-webpanel-start.sh "http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}" "{{$ApplicationPort2}}" "{{$ApplicationPort3}}" "{{$ApplicationPort4}}" "{{$ApplicationPort5}}"
 App.UseLinuxIOREDIR=False
 App.AppSettings={}
 App.EnvironmentVariables={}
@@ -48,30 +48,27 @@ App.UserActions=[]
 App.ForceUpdate=False
 App.Compatibility=None
 App.RapidStartup=False
-App.SmartExcludeExemptions=["*.json","*.log","*.jsonl"]
+App.SmartExcludeExemptions=["*.cfg","*.conf","*.config","*.ini","*.json","*.xml","*.properties","*.kvp","*.yml","*.yaml","*.toml","*.lua"]
 App.SmartExcludeSupported=True
 App.DumpFullChildProcessTree=True
 App.ApplicationReadyMode=RegexMatch
-App.AdditionalContainerVolumes=
-App.AdditionalContainerEnv=
-App.OnlineRegex=^\[Analytics\] Player joined: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
-App.OfflineRegex=^\[Analytics\] Player left: (?<Username>[^ ]+) \(accountId=(?<UID>[^)]+)\)$
-App.UserNameMatchGroup=Username
-App.UserIDMatchGroup=UID
+App.OnlineRegex=^\[Analytics\] Player joined: (?<username>[^ ]+) \(accountId=(?<userid>[^)]+)\)$
+App.OfflineRegex=^\[Analytics\] Player left: (?<username>[^ ]+) \(accountId=(?<userid>[^)]+)\)$
+App.UserNameMatchGroup=username
+App.UserIDMatchGroup=userid
 App.UseUUIDForUserIdentification=False
 
 Console.FilterMatchRegex=
 Console.FilterMatchReplacement=
 Console.ThrowawayMessageRegex=
-Console.AppReadyRegex=Now listening on:
-Console.UserJoinRegex=^\[Analytics\] Player joined: (?<username>[^ ]+) \(accountId=(?<accountId>[^)]+)\)$
-Console.UserLeaveRegex=^\[Analytics\] Player left: (?<username>[^ ]+) \(accountId=(?<accountId>[^)]+)\)$
+Console.AppReadyRegex=^.*Now listening on: https?://[^\s]+\s*$
+Console.UserJoinRegex=^\[Analytics\] Player joined: (?<username>[^ ]+) \(accountId=(?<userid>[^)]+)\)$
+Console.UserLeaveRegex=^\[Analytics\] Player left: (?<username>[^ ]+) \(accountId=(?<userid>[^)]+)\)$
 Console.UserChatRegex=
 Console.UpdateAvailableRegex=
 Console.PreConnectRegex=
 Console.ConnectIPRegex=
 Console.MetricsRegex=
-Console.HideFromConsoleRegex=
 Console.SuppressLogAtStart=False
 Console.UserActions={}
 
