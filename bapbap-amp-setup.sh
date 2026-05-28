@@ -1,36 +1,43 @@
 #!/usr/bin/env bash
-# BAPBAP Custom Server — One-shot AMP instance setup / re-sync script.
+# BAPBAP Custom Server — One-shot AMP instance setup / re-install / update.
 #
-# What it does:
-#   1. Stops the AMP instance (if running)
-#   2. Downloads latest kvp + configmanifest directly from GitHub raw
-#      (bypasses any broken git-clone in DeploymentTemplates)
-#   3. Writes them to the instance dir as GenericModule.kvp + configmanifest.json
-#   4. Restarts the instance
+# Does EVERYTHING:
+#   1. Stops the AMP instance
+#   2. Downloads the latest server bundle (~585 MB) from GitHub Releases
+#   3. Extracts into the instance dir, fixes line-endings + exec bits
+#   4. Writes a fresh kvp + configmanifest (no AMP auto-update, AMP only runs the binary)
+#   5. Starts the instance
 #
-# Run as the amp user (or via sudo -u amp bash). Re-runnable any time the
-# config schema changes; idempotent.
+# Re-runnable any time. Use it for first install, re-install after corruption,
+# or pulling new server code.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapbap-amp-setup.sh | sudo -u amp bash
+#   curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapbap-amp-setup.sh | tr -d '\r' | sudo -u amp bash
 #
 # Or with a custom instance name:
-#   curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapbap-amp-setup.sh | sudo -u amp INSTANCE=MyOtherInstance bash
+#   curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapbap-amp-setup.sh | tr -d '\r' | sudo -u amp INSTANCE=MyOtherInstance bash
 
 set -euo pipefail
 
 INSTANCE="${INSTANCE:-FinalesBattleRoyale01}"
 REPO="${REPO:-Sonic0810/BAPBAP-CustomServer-AMPTemplates}"
 BRANCH="${BRANCH:-main}"
+BUNDLE_NAME="${BUNDLE_NAME:-bapcustomserver-amp-full-linux-wine.zip}"
+BUNDLE_URL="${BUNDLE_URL:-https://github.com/$REPO/releases/latest/download/$BUNDLE_NAME}"
 
 AMP_HOME="${AMP_HOME:-/home/amp/.ampdata}"
 INST_DIR="$AMP_HOME/instances/$INSTANCE"
 RAW="https://raw.githubusercontent.com/$REPO/$BRANCH"
+TMP_ZIP="/tmp/bapbap-bundle-$$.zip"
 
-echo "==> BAPBAP AMP setup"
+cleanup() { rm -f "$TMP_ZIP" 2>/dev/null || true; }
+trap cleanup EXIT
+
+echo "==> BAPBAP AMP one-shot setup"
 echo "    instance:  $INSTANCE"
-echo "    repo:      $REPO@$BRANCH"
 echo "    inst dir:  $INST_DIR"
+echo "    bundle:    $BUNDLE_URL"
+echo "    kvp src:   $RAW/bapcustomservergithub.kvp"
 echo
 
 if [ ! -d "$INST_DIR" ]; then
@@ -40,48 +47,81 @@ if [ ! -d "$INST_DIR" ]; then
   exit 1
 fi
 
+if ! command -v unzip >/dev/null 2>&1; then
+  echo "!! 'unzip' is not installed. Install it (apt-get install unzip) and re-run."
+  exit 1
+fi
+
 echo "==> Stopping instance (if running)"
 ampinstmgr stopinstance "$INSTANCE" 2>/dev/null || true
 sleep 2
 
-echo "==> Backing up existing kvp + configmanifest"
+echo "==> Backing up old kvp + configmanifest"
 ts="$(date +%Y%m%d-%H%M%S)"
 [ -f "$INST_DIR/GenericModule.kvp" ]   && cp "$INST_DIR/GenericModule.kvp"   "$INST_DIR/GenericModule.kvp.bak.$ts"   || true
 [ -f "$INST_DIR/configmanifest.json" ] && cp "$INST_DIR/configmanifest.json" "$INST_DIR/configmanifest.json.bak.$ts" || true
 
-echo "==> Downloading latest kvp from GitHub raw"
-curl -fsSL "$RAW/bapcustomservergithub.kvp"       -o "$INST_DIR/GenericModule.kvp"
+echo "==> Downloading server bundle (~585 MB) from GitHub Releases"
+curl -fL "$BUNDLE_URL" -o "$TMP_ZIP" --progress-bar
 
-echo "==> Downloading latest configmanifest from GitHub raw"
+echo "==> Extracting into $INST_DIR"
+unzip -oq "$TMP_ZIP" -d "$INST_DIR"
+
+echo "==> Stripping CRLF from shell scripts (safe even if already LF)"
+for f in "$INST_DIR/BapCustomServer"/*.sh; do
+  [ -f "$f" ] && sed -i 's/\r$//' "$f"
+done
+
+echo "==> Setting exec bits on scripts + binaries"
+for f in BapCustomServer createdump amp-webpanel-start.sh start-linux-wine.sh start-match.sh; do
+  p="$INST_DIR/BapCustomServer/$f"
+  [ -f "$p" ] && chmod +x "$p" || true
+done
+
+echo "==> Downloading fresh kvp + configmanifest from GitHub raw"
+curl -fsSL "$RAW/bapcustomservergithub.kvp"       -o "$INST_DIR/GenericModule.kvp"
 curl -fsSL "$RAW/bapcustomservergithubconfig.json" -o "$INST_DIR/configmanifest.json"
 
-echo "==> Verifying kvp content"
-if grep -q '^App.UpdateSources=\[' "$INST_DIR/GenericModule.kvp"; then
-  echo "    OK: UpdateSources is inlined JSON"
-elif grep -q '^App.UpdateSources=@IncludeJson' "$INST_DIR/GenericModule.kvp"; then
-  echo "!!  UpdateSources still uses @IncludeJson — that means GitHub raw served the old version."
-  echo "    Try again in 30 seconds (CDN cache) or check the repo state."
-  exit 2
-else
-  echo "!!  No App.UpdateSources line found at all — abort"
-  exit 3
+echo "==> Sanity-checking kvp"
+if grep -q '^App.UpdateSources=\[{"UpdateStageName":"Download' "$INST_DIR/GenericModule.kvp"; then
+  echo "!!  kvp still has the GithubRelease download stage. That stage is what causes the"
+  echo "    'Updating now / Unable to run' loop. Pulling a newer kvp from origin/main..."
+  exit 4
 fi
+if grep -q '^App.UpdateSources=' "$INST_DIR/GenericModule.kvp"; then
+  echo "    OK: kvp UpdateSources contains only chmod stages (no auto-download)."
+fi
+
+echo "==> Verifying critical files exist"
+required=(
+  "$INST_DIR/BapCustomServer/BapCustomServer"
+  "$INST_DIR/BapCustomServer/amp-webpanel-start.sh"
+  "$INST_DIR/BapCustomServer/appsettings.json"
+)
+missing=0
+for f in "${required[@]}"; do
+  if [ ! -f "$f" ]; then
+    echo "    !! MISSING: $f"
+    missing=1
+  fi
+done
+[ $missing -eq 0 ] || { echo "Bundle extraction incomplete. Aborting."; exit 5; }
+echo "    OK: server binary + start script + appsettings.json present"
 
 echo "==> Starting instance"
 ampinstmgr startinstance "$INSTANCE"
 
 cat <<EOF
 
-==> Setup complete.
+==> DONE.
 
-Next steps (in the AMP web UI for the instance):
-  1. Open the instance ($INSTANCE)
-  2. Click "Update"   — downloads the 585 MB server bundle from the latest GitHub release
-  3. Wait for the update to finish (about 1-2 minutes on a Hetzner box)
-  4. Click "Start"    — server comes up on the configured ports
+Instance "$INSTANCE" is starting. The AMP web UI Console tab shows live output.
 
-For future updates:
-  - Server code / mod / game files: just click Update + Start in the AMP UI.
-  - kvp / configmanifest schema changes (rare): re-run this script.
+You should NOT need to click "Update" in the AMP UI anymore — this script
+handled the download. If you want fresh code in the future, just re-run:
+
+  curl -fsSL $RAW/bapbap-amp-setup.sh | tr -d '\r' | sudo -u amp bash
+
+That fetches a new bundle + kvp + configmanifest and restarts the instance.
 
 EOF
