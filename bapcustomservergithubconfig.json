@@ -530,6 +530,20 @@
                        }
     },
     {
+        "DisplayName":  "All Maps in All Modes",
+        "Description":  "When ON, every enabled map above can spawn in EVERY game mode (Solos / Duos / Trios / FFA / Custom). Solos can land on a Trios-default map, Trios on a Solos-default map, etc. When OFF, the per-mode MapMapping list applies. Recommended ON for private servers where you want full map control.",
+        "FieldName":  "AllMapsAllModes",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Maps",
+        "Subcategory":  "Map Pool",
+        "ParamFieldName":  "$.CustomServer.MapPool.AllMapsAllModes",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
         "DisplayName":  "Randomize Map Per Match",
         "Description":  "Pick a random map from the enabled pool for each match. If false, mapId 1 (Tireclub) is always used.",
         "FieldName":  "RandomizeMapPerMatch",
