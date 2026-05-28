@@ -1,27 +1,32 @@
 #!/usr/bin/env bash
-# BAPBAP Custom Server — One-shot AMP instance setup / re-install / update.
+# BAPBAP Custom Server — One-shot AMP instance setup / repair script.
 #
-# Does EVERYTHING:
+# What it does:
 #   1. Stops the AMP instance
-#   2. Downloads the latest server bundle (~585 MB) from GitHub Releases
-#   3. Extracts into the instance dir, fixes line-endings + exec bits
-#   4. Writes a fresh kvp + configmanifest (no AMP auto-update, AMP only runs the binary)
+#   2. Backs up old kvp + configmanifest
+#   3. Downloads kvp + configmanifest + ports + updates + metaconfig from GitHub raw
+#      (so AMP's @IncludeJson resolves correctly)
+#   4. (Optional, default ON) Pre-installs the 585 MB server bundle so the
+#      first Start works immediately. After this, all future updates run
+#      via the AMP UI "Update" button and only touch game files; user data
+#      under data/ and logs/ is NOT in the update zip and stays untouched.
 #   5. Starts the instance
 #
-# Re-runnable any time. Use it for first install, re-install after corruption,
-# or pulling new server code.
+# Re-runnable any time the kvp schema changes or you want to repair a stuck
+# instance.
 #
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapbap-amp-setup.sh | tr -d '\r' | sudo -u amp bash
 #
-# Or with a custom instance name:
-#   curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapbap-amp-setup.sh | tr -d '\r' | sudo -u amp INSTANCE=MyOtherInstance bash
+# Skip the pre-install (just sync templates + restart, let AMP UI Update fetch the bundle):
+#   curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapbap-amp-setup.sh | tr -d '\r' | sudo -u amp SKIP_BUNDLE=1 bash
 
 set -euo pipefail
 
 INSTANCE="${INSTANCE:-FinalesBattleRoyale01}"
 REPO="${REPO:-Sonic0810/BAPBAP-CustomServer-AMPTemplates}"
 BRANCH="${BRANCH:-main}"
+SKIP_BUNDLE="${SKIP_BUNDLE:-0}"
 BUNDLE_NAME="${BUNDLE_NAME:-bapcustomserver-amp-full-linux-wine.zip}"
 BUNDLE_URL="${BUNDLE_URL:-https://github.com/$REPO/releases/latest/download/$BUNDLE_NAME}"
 
@@ -34,10 +39,11 @@ cleanup() { rm -f "$TMP_ZIP" 2>/dev/null || true; }
 trap cleanup EXIT
 
 echo "==> BAPBAP AMP one-shot setup"
-echo "    instance:  $INSTANCE"
-echo "    inst dir:  $INST_DIR"
-echo "    bundle:    $BUNDLE_URL"
-echo "    kvp src:   $RAW/bapcustomservergithub.kvp"
+echo "    instance:   $INSTANCE"
+echo "    inst dir:   $INST_DIR"
+echo "    repo:       $RAW"
+echo "    bundle:     $BUNDLE_URL"
+echo "    skip bundle: $SKIP_BUNDLE"
 echo
 
 if [ ! -d "$INST_DIR" ]; then
@@ -47,8 +53,9 @@ if [ ! -d "$INST_DIR" ]; then
   exit 1
 fi
 
-if ! command -v python3 >/dev/null 2>&1; then
-  echo "!! 'python3' is not installed. Install it (apt-get install python3) and re-run."
+if [ "$SKIP_BUNDLE" != "1" ] && ! command -v python3 >/dev/null 2>&1; then
+  echo "!! 'python3' is not installed. Install it (apt-get install python3) and re-run,"
+  echo "   or pass SKIP_BUNDLE=1 to skip the bundle pre-install (and use AMP UI Update instead)."
   exit 1
 fi
 
@@ -61,85 +68,106 @@ ts="$(date +%Y%m%d-%H%M%S)"
 [ -f "$INST_DIR/GenericModule.kvp" ]   && cp "$INST_DIR/GenericModule.kvp"   "$INST_DIR/GenericModule.kvp.bak.$ts"   || true
 [ -f "$INST_DIR/configmanifest.json" ] && cp "$INST_DIR/configmanifest.json" "$INST_DIR/configmanifest.json.bak.$ts" || true
 
-echo "==> Downloading server bundle (~585 MB) from GitHub Releases"
-curl -fL "$BUNDLE_URL" -o "$TMP_ZIP" --progress-bar
+echo "==> Syncing AMP template files from GitHub raw"
+curl -fsSL "$RAW/bapcustomservergithub.kvp"             -o "$INST_DIR/GenericModule.kvp"
+curl -fsSL "$RAW/bapcustomservergithubconfig.json"      -o "$INST_DIR/configmanifest.json"
+curl -fsSL "$RAW/bapcustomservergithubports.json"       -o "$INST_DIR/bapcustomservergithubports.json"
+curl -fsSL "$RAW/bapcustomservergithubupdates.json"     -o "$INST_DIR/bapcustomservergithubupdates.json"
+curl -fsSL "$RAW/bapcustomservergithubmetaconfig.json"  -o "$INST_DIR/bapcustomservergithubmetaconfig.json"
+echo "    OK: 5 template files written"
 
-echo "==> Extracting into $INST_DIR (using python3 — handles Windows backslash paths)"
-python3 - <<PYEOF
+echo "==> Sanity-checking kvp"
+exec_line="$(grep '^App.ExecutableLinux=' "$INST_DIR/GenericModule.kvp" || true)"
+if [ -z "$exec_line" ]; then
+  echo "!! kvp missing App.ExecutableLinux — abort"; exit 3
+fi
+echo "    $exec_line"
+
+if [ "$SKIP_BUNDLE" != "1" ]; then
+  echo "==> Downloading server bundle (~585 MB) from latest GitHub Release"
+  curl -fL "$BUNDLE_URL" -o "$TMP_ZIP" --progress-bar
+
+  echo "==> Extracting bundle into $INST_DIR (python3 — handles backslash paths)"
+  python3 - <<PYEOF
 import os, sys, zipfile
 src = "$TMP_ZIP"
 dst = "$INST_DIR"
 count = 0
 with zipfile.ZipFile(src) as z:
     for info in z.infolist():
-        # Windows-built zips use backslash; convert to POSIX
         info.filename = info.filename.replace("\\\\", "/")
         if info.filename.endswith("/"):
             os.makedirs(os.path.join(dst, info.filename), exist_ok=True)
-        else:
-            target = os.path.join(dst, info.filename)
-            os.makedirs(os.path.dirname(target), exist_ok=True)
-            with z.open(info) as src_f, open(target, "wb") as out_f:
-                out_f.write(src_f.read())
-            count += 1
+            continue
+        target = os.path.join(dst, info.filename)
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        with z.open(info) as src_f, open(target, "wb") as out_f:
+            out_f.write(src_f.read())
+        count += 1
 print(f"    extracted {count} files")
 PYEOF
 
-echo "==> Stripping CRLF from shell scripts (safe even if already LF)"
-for f in "$INST_DIR/BapCustomServer"/*.sh; do
-  [ -f "$f" ] && sed -i 's/\r$//' "$f"
-done
+  echo "==> Stripping CRLF + setting exec bits on scripts and binary"
+  for f in "$INST_DIR/BapCustomServer"/*.sh; do
+    [ -f "$f" ] && sed -i 's/\r$//' "$f"
+  done
+  for f in BapCustomServer createdump amp-webpanel-start.sh start-linux-wine.sh start-match.sh; do
+    p="$INST_DIR/BapCustomServer/$f"
+    [ -f "$p" ] && chmod +x "$p" || true
+  done
 
-echo "==> Setting exec bits on scripts + binaries"
-for f in BapCustomServer createdump amp-webpanel-start.sh start-linux-wine.sh start-match.sh; do
-  p="$INST_DIR/BapCustomServer/$f"
-  [ -f "$p" ] && chmod +x "$p" || true
-done
-
-echo "==> Downloading fresh kvp + configmanifest from GitHub raw"
-curl -fsSL "$RAW/bapcustomservergithub.kvp"       -o "$INST_DIR/GenericModule.kvp"
-curl -fsSL "$RAW/bapcustomservergithubconfig.json" -o "$INST_DIR/configmanifest.json"
-
-echo "==> Sanity-checking kvp"
-if grep -q '^App.UpdateSources=\[{"UpdateStageName":"Download' "$INST_DIR/GenericModule.kvp"; then
-  echo "!!  kvp still has the GithubRelease download stage. That stage is what causes the"
-  echo "    'Updating now / Unable to run' loop. Pulling a newer kvp from origin/main..."
-  exit 4
+  echo "==> Verifying critical files"
+  required=(
+    "$INST_DIR/BapCustomServer/BapCustomServer"
+    "$INST_DIR/BapCustomServer/appsettings.json"
+  )
+  missing=0
+  for f in "${required[@]}"; do
+    if [ ! -f "$f" ]; then
+      echo "    !! MISSING: $f"
+      missing=1
+    fi
+  done
+  [ $missing -eq 0 ] || { echo "Bundle extraction incomplete. Aborting."; exit 5; }
+  echo "    OK: BapCustomServer binary + appsettings.json present"
 fi
-if grep -q '^App.UpdateSources=' "$INST_DIR/GenericModule.kvp"; then
-  echo "    OK: kvp UpdateSources contains only chmod stages (no auto-download)."
-fi
-
-echo "==> Verifying critical files exist"
-required=(
-  "$INST_DIR/BapCustomServer/BapCustomServer"
-  "$INST_DIR/BapCustomServer/amp-webpanel-start.sh"
-  "$INST_DIR/BapCustomServer/appsettings.json"
-)
-missing=0
-for f in "${required[@]}"; do
-  if [ ! -f "$f" ]; then
-    echo "    !! MISSING: $f"
-    missing=1
-  fi
-done
-[ $missing -eq 0 ] || { echo "Bundle extraction incomplete. Aborting."; exit 5; }
-echo "    OK: server binary + start script + appsettings.json present"
 
 echo "==> Starting instance"
 ampinstmgr startinstance "$INSTANCE"
 
 cat <<EOF
 
-==> DONE.
+=========================================================
+==> SETUP COMPLETE.
+=========================================================
 
-Instance "$INSTANCE" is starting. The AMP web UI Console tab shows live output.
+Instance "$INSTANCE" is starting. Open the AMP web UI Console tab to watch
+the live output. Within 10–30 seconds you should see:
 
-You should NOT need to click "Update" in the AMP UI anymore — this script
-handled the download. If you want fresh code in the future, just re-run:
+  Now listening on: http://0.0.0.0:5058
 
-  curl -fsSL $RAW/bapbap-amp-setup.sh | tr -d '\r' | sudo -u amp bash
+— that's the regex AMP looks for to flip status to "Ready".
 
-That fetches a new bundle + kvp + configmanifest and restarts the instance.
+GOING FORWARD (no more SSH):
+
+  • Daily start/stop      → AMP UI Start/Stop buttons
+  • Server code update    → AMP UI Update button
+                            (downloads new bundle, refreshes ONLY the
+                             game/server files; data/ and logs/ are
+                             excluded from the bundle and never touched)
+  • AMP UI field changes  → AMP rewrites appsettings.json from your UI
+                             values on every Start (via metaconfig). Your
+                             UI changes survive every Update.
+
+USER DATA THAT IS NEVER OVERWRITTEN:
+
+  $INST_DIR/BapCustomServer/data/       (player accounts, economy, ranked, admin)
+  $INST_DIR/BapCustomServer/logs/       (audit log, match history)
+  $INST_DIR/BapCustomServer/MelonPreferences.cfg
+  $INST_DIR/BapCustomServer/Mods/BapCustomServer.ini
+
+Re-run this script ONLY when:
+  • You see the kvp / Configuration UI is out of date, OR
+  • The instance is broken and you want a clean reset.
 
 EOF
