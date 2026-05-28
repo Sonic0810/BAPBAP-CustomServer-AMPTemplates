@@ -87,11 +87,12 @@ if [ "$SKIP_BUNDLE" != "1" ]; then
   echo "==> Downloading server bundle (~585 MB) from latest GitHub Release"
   curl -fL "$BUNDLE_URL" -o "$TMP_ZIP" --progress-bar
 
-  echo "==> Extracting bundle into $INST_DIR (python3 — handles backslash paths)"
+  echo "==> Extracting bundle into $INST_DIR/BapCustomServer (python3 — handles backslash paths)"
+  mkdir -p "$INST_DIR/BapCustomServer"
   python3 - <<PYEOF
 import os, sys, zipfile
 src = "$TMP_ZIP"
-dst = "$INST_DIR"
+dst = "$INST_DIR/BapCustomServer"
 count = 0
 with zipfile.ZipFile(src) as z:
     for info in z.infolist():
