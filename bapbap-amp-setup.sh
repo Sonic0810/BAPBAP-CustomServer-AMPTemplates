@@ -96,11 +96,37 @@ dst = "$INST_DIR/BapCustomServer"
 count = 0
 with zipfile.ZipFile(src) as z:
     for info in z.infolist():
-        info.filename = info.filename.replace("\\\\", "/")
-        if info.filename.endswith("/"):
-            os.makedirs(os.path.join(dst, info.filename), exist_ok=True)
+        name = info.filename.replace("\\\\", "/").lstrip("/")
+        parts = [part for part in name.split("/") if part not in ("", ".")]
+        if not parts or any(part == ".." for part in parts):
+            print(f"    skipped unsafe zip entry: {info.filename}", file=sys.stderr)
             continue
-        target = os.path.join(dst, info.filename)
+        name = "/".join(parts)
+        protected = (
+            name.startswith("data/") or
+            name.startswith("logs/") or
+            name.startswith("data/players/") or
+            name.endswith(".jsonl") or
+            name.endswith("/admin-state.json") or
+            name.endswith("/economy-state.json") or
+            name.endswith("/friends-state.json") or
+            name.endswith("/ranked-state.json") or
+            name.endswith("/shop-state.json") or
+            name in {
+                "data/admin-state.json",
+                "data/economy-state.json",
+                "data/friends-state.json",
+                "data/ranked-state.json",
+                "data/shop-state.json",
+            }
+        )
+        if protected:
+            print(f"    preserved existing user-state path, skipped zip entry: {name}")
+            continue
+        if name.endswith("/"):
+            os.makedirs(os.path.join(dst, name), exist_ok=True)
+            continue
+        target = os.path.join(dst, name)
         os.makedirs(os.path.dirname(target), exist_ok=True)
         with z.open(info) as src_f, open(target, "wb") as out_f:
             out_f.write(src_f.read())
@@ -164,8 +190,11 @@ USER DATA THAT IS NEVER OVERWRITTEN:
 
   $INST_DIR/BapCustomServer/data/       (player accounts, economy, ranked, admin)
   $INST_DIR/BapCustomServer/logs/       (audit log, match history)
-  $INST_DIR/BapCustomServer/MelonPreferences.cfg
-  $INST_DIR/BapCustomServer/Mods/BapCustomServer.ini
+
+Dedicated game config files under game/Mods/ and game/UserData/ are mod/runtime
+configuration and may be refreshed by updates so Wine/headless server defaults stay
+correct. They do not store match history, purchases, ranked state, friends, or player
+accounts.
 
 Re-run this script ONLY when:
   • You see the kvp / Configuration UI is out of date, OR

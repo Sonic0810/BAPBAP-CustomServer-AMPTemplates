@@ -508,8 +508,8 @@
                        }
     },
     {
-        "DisplayName":  "Enable Map ID 1 (Tire Club)",
-        "Description":  "Include map ID 1 in the random map pool. Confirmed in playtest as Tire Club.",
+        "DisplayName":  "Enable Map 1 - Map2_BazaarCity 3",
+        "Description":  "Include canonical BAPBAP mapId 1 (internal level name: Map2_BazaarCity 3) in the random/allowed map pool.",
         "FieldName":  "EnableMapTireclub",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
@@ -522,8 +522,8 @@
                        }
     },
     {
-        "DisplayName":  "Enable Map ID 2",
-        "Description":  "Include map ID 2 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
+        "DisplayName":  "Enable Map 2 - Map3_Lyceum",
+        "Description":  "Include canonical BAPBAP mapId 2 (internal level name: Map3_Lyceum) in the random/allowed map pool.",
         "FieldName":  "EnableMapBazaarcity",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
@@ -536,8 +536,8 @@
                        }
     },
     {
-        "DisplayName":  "Enable Map ID 3",
-        "Description":  "Include map ID 3 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
+        "DisplayName":  "Enable Map 3 - Arena_Map2",
+        "Description":  "Include canonical BAPBAP mapId 3 (internal level name: Arena_Map2) in the random/allowed map pool.",
         "FieldName":  "EnableMapBonsai",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
@@ -550,8 +550,8 @@
                        }
     },
     {
-        "DisplayName":  "Enable Map ID 4",
-        "Description":  "Include map ID 4 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
+        "DisplayName":  "Enable Map 4 - OpenBetaMap#J02_P_Boccato",
+        "Description":  "Include canonical BAPBAP mapId 4 (internal level name: OpenBetaMap#J02_P_Boccato) in the random/allowed map pool.",
         "FieldName":  "EnableMapSunset",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
@@ -579,7 +579,7 @@
     },
     {
         "DisplayName":  "Randomize Map Per Match",
-        "Description":  "Pick a random map from the enabled pool for each match. If false, mapId 1 (Tireclub) is always used.",
+        "Description":  "Pick one enabled map once per match and reuse that same mapId for setup-game, queue-matched, and GAME_STARTED. If false, the configured default mapId is used when enabled, otherwise the first enabled map is used.",
         "FieldName":  "RandomizeMapPerMatch",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",

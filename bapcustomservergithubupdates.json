@@ -1,5 +1,55 @@
 [
   {
+    "UpdateStageName": "Sync AMP GenericModule template",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapcustomservergithub.kvp",
+    "UpdateSourceArgs": "GenericModule.kvp",
+    "UpdateSourceTarget": "{{$FullInstanceDir}}",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": true
+  },
+  {
+    "UpdateStageName": "Sync AMP configuration UI manifest",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapcustomservergithubconfig.json",
+    "UpdateSourceArgs": "configmanifest.json",
+    "UpdateSourceTarget": "{{$FullInstanceDir}}",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": true
+  },
+  {
+    "UpdateStageName": "Sync AMP metaconfig manifest",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapcustomservergithubmetaconfig.json",
+    "UpdateSourceArgs": "bapcustomservergithubmetaconfig.json",
+    "UpdateSourceTarget": "{{$FullInstanceDir}}",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": true
+  },
+  {
+    "UpdateStageName": "Sync AMP ports manifest",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapcustomservergithubports.json",
+    "UpdateSourceArgs": "bapcustomservergithubports.json",
+    "UpdateSourceTarget": "{{$FullInstanceDir}}",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": true
+  },
+  {
+    "UpdateStageName": "Sync AMP update manifest for next run",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/bapcustomservergithubupdates.json",
+    "UpdateSourceArgs": "bapcustomservergithubupdates.json",
+    "UpdateSourceTarget": "{{$FullInstanceDir}}",
+    "OverwriteExistingFiles": true,
+    "SkipOnFailure": true
+  },
+  {
     "UpdateStageName": "Download BAPBAP Custom Server full package",
     "UpdateSourcePlatform": "Linux",
     "UpdateSource": "GithubRelease",
