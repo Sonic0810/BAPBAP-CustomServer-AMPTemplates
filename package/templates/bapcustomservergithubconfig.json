@@ -83,13 +83,13 @@
     },
     {
         "DisplayName":  "Game Launcher Path",
-        "Description":  "Wrapper used to launch the game. On AMP+wine this is /usr/bin/env which lets us prefix env vars.",
+        "Description":  "Wrapper used to launch each Windows bapbap.exe match process through Wine/Xvfb with an isolated WINEPREFIX.",
         "FieldName":  "GameLauncherPath",
         "InputType":  "text",
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
         "ParamFieldName":  "$.CustomServer.GameLauncherPath",
-        "DefaultValue":  "/usr/bin/env"
+        "DefaultValue":  "./start-match.sh"
     },
     {
         "DisplayName":  "Game Launcher Arguments",
@@ -99,7 +99,7 @@
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
         "ParamFieldName":  "$.CustomServer.GameLauncherArguments",
-        "DefaultValue":  "WINEDLLOVERRIDES=version=n,b /usr/bin/xvfb-run -a /usr/bin/wine \"{gameExecutable}\" {gameArguments}"
+        "DefaultValue":  "\"{gameExecutable}\" {gameArguments}"
     },
     {
         "DisplayName":  "Additional Game Arguments",

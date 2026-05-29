@@ -100,6 +100,8 @@ expected = {
     "PortSearchRange": 1,
     "MaxConcurrentMatches": 1,
     "RequireGameServerKcpPort": True,
+    "GameLauncherPath": "./start-match.sh",
+    "GameLauncherArguments": '"{gameExecutable}" {gameArguments}',
 }
 bad = []
 for key, expected_value in expected.items():

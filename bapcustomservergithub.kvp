@@ -17,7 +17,7 @@ Meta.ConfigVersion=6
 Meta.AppConfigId=44e7d745-1fbc-4db3-b328-69bbf7178a21
 Meta.ContainerPolicy=Supported
 Meta.SpecificDockerImage=cubecoders/ampbase:debian
-Meta.ExtraContainerPackages=["wine", "wine32", "wine64", "xvfb", "xauth", "winetricks"]
+Meta.ExtraContainerPackages=["wine", "wine32", "wine64", "xvfb", "xauth"]
 
 App.DisplayName=BAPBAP Custom Server
 App.RootDir=./BapCustomServer/
