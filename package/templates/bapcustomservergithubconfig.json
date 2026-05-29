@@ -510,11 +510,11 @@
     {
         "DisplayName":  "Enable Map 1 - Map2_BazaarCity 3",
         "Description":  "Include canonical BAPBAP mapId 1 (internal level name: Map2_BazaarCity 3) in the random/allowed map pool.",
-        "FieldName":  "EnableMapTireclub",
+        "FieldName":  "EnableMapBazaarCity",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapTireclub",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapBazaarCity",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -524,11 +524,11 @@
     {
         "DisplayName":  "Enable Map 2 - Map3_Lyceum",
         "Description":  "Include canonical BAPBAP mapId 2 (internal level name: Map3_Lyceum) in the random/allowed map pool.",
-        "FieldName":  "EnableMapBazaarcity",
+        "FieldName":  "EnableMapLyceum",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapBazaarcity",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapLyceum",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -538,11 +538,11 @@
     {
         "DisplayName":  "Enable Map 3 - Arena_Map2",
         "Description":  "Include canonical BAPBAP mapId 3 (internal level name: Arena_Map2) in the random/allowed map pool.",
-        "FieldName":  "EnableMapBonsai",
+        "FieldName":  "EnableMapArenaMap2",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapBonsai",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapArenaMap2",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -552,11 +552,11 @@
     {
         "DisplayName":  "Enable Map 4 - OpenBetaMap#J02_P_Boccato",
         "Description":  "Include canonical BAPBAP mapId 4 (internal level name: OpenBetaMap#J02_P_Boccato) in the random/allowed map pool.",
-        "FieldName":  "EnableMapSunset",
+        "FieldName":  "EnableMapOpenBetaBoccato",
         "InputType":  "checkbox",
         "Category":  "BAPBAP - Maps",
         "Subcategory":  "Map Pool",
-        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapSunset",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapOpenBetaBoccato",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
