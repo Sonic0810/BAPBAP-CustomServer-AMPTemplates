@@ -43,6 +43,21 @@ Web panel install:
 2. Create a new instance from `BAPBAP Custom Server GitHub AutoInstall`.
 3. Press `Update` once. This downloads and installs the full package.
 4. Press `Start`.
+5. Open `http://ark.atomi23.de:5055/health`; expected response is `{"ok":true}`.
+
+Required port exposure:
+
+- `5055/tcp` for lobby/API/WebSocket.
+- `7777/tcp` for match WebSocket.
+- `7778/udp` for match KCP.
+- `7779/tcp` for match TCP fallback.
+- `7850/tcp` for bootstrap HTTP if the AMP/container setup requires explicit exposure.
+
+Before publishing, run the local Linux-layout smoke test:
+
+```powershell
+.\tools\Test-AmpLinuxWinePackageInWsl.ps1
+```
 
 For updates later, publish a new GitHub Release with the same asset name and
 press `Update` in AMP.
