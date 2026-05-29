@@ -128,6 +128,7 @@ contains_text "./game/Mods/BapCustomServer.ini" "Port=5055"
 contains_text "./game/Mods/BapCustomServer.ini" "AutoGuestLogin=false"
 contains_text "./game/Mods/BapCustomServer.ini" "UseNativeGameUi=false"
 contains_text "./game/UserData/MelonPreferences.cfg" "NetTuneEnabled = false"
+contains_text "./start-match.sh" "-force-glcore"
 
 if [ -d "./data" ]; then
   ok "runtime data directory exists and is outside update ZIP payload: ./data"
