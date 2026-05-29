@@ -66,6 +66,7 @@ require_executable "./amp-webpanel-start.sh"
 require_executable "./start-linux-wine.sh"
 require_executable "./start-match.sh"
 require_file "./appsettings.json"
+require_file "./deployment-info.json"
 require_file "./game/Mods/BapCustomServerMelon.dll"
 require_file "./game/Mods/BapCustomServer.ini"
 require_file "./game/UserData/MelonPreferences.cfg"
@@ -117,10 +118,39 @@ PY
   if [ "$rc" -ne 0 ]; then
     failures=$((failures + 1))
   fi
+
+  python3 - "$PUBLIC_HOST" "$LOBBY_PORT" "$BASE_WS_PORT" "$BASE_KCP_PORT" "$BASE_TCP_PORT" "$BASE_HTTP_PORT" <<'PY'
+import json
+import pathlib
+import sys
+
+public_host, lobby, ws, kcp, tcp, http = sys.argv[1:]
+info_path = pathlib.Path("deployment-info.json")
+if not info_path.exists():
+    print("FAIL: deployment-info.json missing", file=sys.stderr)
+    sys.exit(14)
+info = json.loads(info_path.read_text(encoding="utf-8-sig"))
+required = ["releaseLabel", "packageBuildUtc", "gitCommit", "gitBranch", "modDllSha256", "gameExeSha256", "startMatchSha256", "ports"]
+missing = [key for key in required if not info.get(key)]
+ports = info.get("ports", {})
+expected_ports = {"lobby": int(lobby), "ws": int(ws), "kcp": int(kcp), "tcp": int(tcp), "http": int(http)}
+bad_ports = [f"{key}={ports.get(key)!r} expected {value!r}" for key, value in expected_ports.items() if ports.get(key) != value]
+if info.get("publicHost") != public_host:
+    missing.append(f"publicHost={info.get('publicHost')!r} expected {public_host!r}")
+if missing or bad_ports:
+    print("FAIL: deployment-info invalid: " + "; ".join(missing + bad_ports), file=sys.stderr)
+    sys.exit(15)
+print(f"OK: deployment-info release={info.get('releaseLabel')} git={info.get('gitCommit')} packageUtc={info.get('packageBuildUtc')}")
+PY
+  rc=$?
+  if [ "$rc" -ne 0 ]; then
+    failures=$((failures + 1))
+  fi
 else
   warn "python3 unavailable; using weaker appsettings grep checks"
   contains_text "./appsettings.json" "\"PublicGameHost\": \"$PUBLIC_HOST\""
   contains_text "./appsettings.json" "\"BaseKcpPort\": $BASE_KCP_PORT"
+  contains_text "./deployment-info.json" "\"releaseLabel\""
 fi
 
 contains_text "./game/Mods/BapCustomServer.ini" "Host=127.0.0.1"
@@ -129,6 +159,10 @@ contains_text "./game/Mods/BapCustomServer.ini" "AutoGuestLogin=false"
 contains_text "./game/Mods/BapCustomServer.ini" "UseNativeGameUi=false"
 contains_text "./game/UserData/MelonPreferences.cfg" "NetTuneEnabled = false"
 contains_text "./start-match.sh" "-force-glcore"
+contains_text "./start-match.sh" "deploymentInfo="
+contains_text "./start-match.sh" "glxinfo probe"
+contains_text "./amp-webpanel-start.sh" "[amp-start] wineVersion="
+contains_text "./start-linux-wine.sh" "[start-linux-wine] winePath="
 
 if [ -d "./data" ]; then
   ok "runtime data directory exists and is outside update ZIP payload: ./data"
