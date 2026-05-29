@@ -119,7 +119,7 @@
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
         "ParamFieldName":  "$.CustomServer.GameServerReadyTimeoutSeconds",
-        "DefaultValue":  "150"
+        "DefaultValue":  "300"
     },
     {
         "DisplayName":  "Public Game Port - WebSocket",
