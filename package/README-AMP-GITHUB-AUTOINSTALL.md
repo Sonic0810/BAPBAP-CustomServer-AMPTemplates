@@ -75,5 +75,20 @@ Before publishing, run the local Linux-layout smoke test:
 .\tools\Test-AmpLinuxWinePackageInWsl.ps1
 ```
 
+After pressing `Update` and `Start` on the real AMP instance, use both live
+checks before calling the host ready:
+
+```powershell
+.\tools\Test-AmpLivePublic.ps1 -FailOnUnreachable
+```
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Sonic0810/BAPBAP-CustomServer-AMPTemplates/main/verify-amp-instance.sh | sudo docker exec -i AMP_BAPBAPModding01 bash -s
+```
+
+The public check proves DNS, release assets, raw AMP template files, and
+externally reachable `/health`/TCP ports. The container check proves the live
+AMP filesystem, hashes, appsettings, local health, and current `ss` port state.
+
 For updates later, publish a new GitHub Release with the same asset name and
 press `Update` in AMP. This refreshes server/game/mod files and the AMP UI template files while preserving `data/**` and `logs/**`.
