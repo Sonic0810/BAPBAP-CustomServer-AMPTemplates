@@ -6,9 +6,9 @@ AMP install/update flow:
 
 1. AMP runs the Generic module update.
 2. The template downloads `bapcustomserver-amp-full-linux-wine.zip` from a GitHub Release.
-3. AMP unzips it into the instance root.
+3. AMP unzips it into the instance base directory (`BapCustomServer/`).
 4. AMP marks the Linux start files executable.
-5. Start uses `/bin/sh ./BapCustomServer/amp-webpanel-start.sh`, so the first process is a system executable and does not depend on ZIP-preserved executable bits.
+5. Start uses `/bin/sh ./amp-webpanel-start.sh` from that base directory, so the first process is a system executable and does not depend on ZIP-preserved executable bits.
 
 The KVP uses the same layout as normal AMP configuration repositories:
 `App.UpdateSources=@IncludeJson[bapcustomservergithubupdates.json]`. Keep the

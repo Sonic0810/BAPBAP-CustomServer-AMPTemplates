@@ -1,282 +1,906 @@
-[
-  {
-    "DisplayName": "Public Base URL",
-    "Description": "External URL clients use for socket discovery and WebSocket lobby traffic.",
-    "FieldName": "PublicBaseUrl",
-    "InputType": "text",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Network",
-    "ParamFieldName": "CustomServer.PublicBaseUrl",
-    "DefaultValue": "http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}"
-  },
-  {
-    "DisplayName": "Public Game Host",
-    "Description": "Host/IP sent to clients in GAME_STARTED for match connections.",
-    "FieldName": "PublicGameHost",
-    "InputType": "text",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Network",
-    "ParamFieldName": "CustomServer.PublicGameHost",
-    "DefaultValue": "{{$ApplicationIPBinding}}"
-  },
-  {
-    "DisplayName": "Launch Match Processes",
-    "Description": "Start one game process per custom match. Disable only when pointing clients at an external match host.",
-    "FieldName": "LaunchGameServers",
-    "InputType": "checkbox",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Match Host",
-    "ParamFieldName": "CustomServer.LaunchGameServers",
-    "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
-  },
-  {
-    "DisplayName": "Require Bootstrap",
-    "Description": "Fail match start if the launched game process does not accept setup-game/add-teams/queue-matched.",
-    "FieldName": "RequireGameServerBootstrap",
-    "InputType": "checkbox",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Match Host",
-    "ParamFieldName": "CustomServer.RequireGameServerBootstrap",
-    "DefaultValue": "true",
-    "EnumValues": { "True": "true", "False": "false" }
-  },
-  {
-    "DisplayName": "Game Executable Path",
-    "Description": "Path to the Windows game EXE, Linux dedicated binary, or Wine-hosted EXE relative to the server content root.",
-    "FieldName": "GameExecutablePath",
-    "InputType": "text",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Match Host",
-    "ParamFieldName": "CustomServer.GameExecutablePath",
-    "DefaultValue": "./game/bapbap.exe"
-  },
-  {
-    "DisplayName": "Game Working Directory",
-    "Description": "Working directory used when launching match processes.",
-    "FieldName": "GameWorkingDirectory",
-    "InputType": "text",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Match Host",
-    "ParamFieldName": "CustomServer.GameWorkingDirectory",
-    "DefaultValue": "./game"
-  },
-  {
-    "DisplayName": "Game Launcher Path",
-    "Description": "Optional wrapper command, for example wine on Linux when using a Windows game executable.",
-    "FieldName": "GameLauncherPath",
-    "InputType": "text",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Match Host",
-    "ParamFieldName": "CustomServer.GameLauncherPath",
-    "DefaultValue": ""
-  },
-  {
-    "DisplayName": "Game Launcher Arguments",
-    "Description": "Wrapper command argument template. Use {gameExecutable} and {gameArguments}.",
-    "FieldName": "GameLauncherArguments",
-    "InputType": "text",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Match Host",
-    "ParamFieldName": "CustomServer.GameLauncherArguments",
-    "DefaultValue": "\"{gameExecutable}\" {gameArguments}"
-  },
-  {
-    "DisplayName": "Game Log Directory",
-    "Description": "Directory where per-match Unity logs are written.",
-    "FieldName": "GameLogDirectory",
-    "InputType": "text",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Logs",
-    "ParamFieldName": "CustomServer.GameLogDirectory",
-    "DefaultValue": "logs/game-servers"
-  },
-  {
-    "DisplayName": "Base Bootstrap HTTP Port",
-    "FieldName": "BaseHttpPort",
-    "InputType": "number",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Ports",
-    "ParamFieldName": "CustomServer.BaseHttpPort",
-    "DefaultValue": "{{$ApplicationPort5}}"
-  },
-  {
-    "DisplayName": "Base Match WebSocket Port",
-    "FieldName": "BaseWsPort",
-    "InputType": "number",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Ports",
-    "ParamFieldName": "CustomServer.BaseWsPort",
-    "DefaultValue": "{{$ApplicationPort2}}"
-  },
-  {
-    "DisplayName": "Base Match KCP Port",
-    "FieldName": "BaseKcpPort",
-    "InputType": "number",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Ports",
-    "ParamFieldName": "CustomServer.BaseKcpPort",
-    "DefaultValue": "{{$ApplicationPort3}}"
-  },
-  {
-    "DisplayName": "Base Match TCP Port",
-    "FieldName": "BaseTcpPort",
-    "InputType": "number",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Ports",
-    "ParamFieldName": "CustomServer.BaseTcpPort",
-    "DefaultValue": "{{$ApplicationPort4}}"
-  },
-  {
-    "DisplayName": "Port Search Range",
-    "Description": "How many sequential ports can be used for concurrent match processes.",
-    "FieldName": "PortSearchRange",
-    "InputType": "number",
-    "Category": "BAPBAP Custom Server",
-    "Subcategory": "Ports",
-    "ParamFieldName": "CustomServer.PortSearchRange",
-    "DefaultValue": "200"
-  },
-  {
-    "DisplayName": "Default Map ID",
-    "Description": "Default custom lobby mapId. The in-game custom lobby can override it.",
-    "FieldName": "MapId",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Lobby Defaults",
-    "ParamFieldName": "CustomServer.MatchDefaults.MapId",
-    "DefaultValue": "1"
-  },
-  {
-    "DisplayName": "Default Unity Game Mode",
-    "FieldName": "UnityGameMode",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Lobby Defaults",
-    "ParamFieldName": "CustomServer.MatchDefaults.UnityGameMode",
-    "DefaultValue": "0"
-  },
-  {
-    "DisplayName": "Default Matchmaking Game Mode",
-    "FieldName": "MatchmakingGameMode",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Lobby Defaults",
-    "ParamFieldName": "CustomServer.MatchDefaults.MatchmakingGameMode",
-    "DefaultValue": "0"
-  },
-  {
-    "DisplayName": "Default Team Size",
-    "FieldName": "TeamSize",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Lobby Defaults",
-    "ParamFieldName": "CustomServer.MatchDefaults.TeamSize",
-    "DefaultValue": "1"
-  },
-  {
-    "DisplayName": "Default Max Teams",
-    "FieldName": "MaxTeams",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Lobby Defaults",
-    "ParamFieldName": "CustomServer.MatchDefaults.MaxTeams",
-    "DefaultValue": "8"
-  },
-  {
-    "DisplayName": "Default Bot Teams",
-    "FieldName": "BotTeams",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Bots",
-    "ParamFieldName": "CustomServer.MatchDefaults.BotTeams",
-    "DefaultValue": "0"
-  },
-  {
-    "DisplayName": "Default Bot Difficulty",
-    "FieldName": "BotDifficulty",
-    "InputType": "enum",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Bots",
-    "ParamFieldName": "CustomServer.MatchDefaults.BotDifficulty",
-    "DefaultValue": "1",
-    "EnumValues": { "0": "Easy", "1": "Medium", "2": "Hard" }
-  },
-  {
-    "DisplayName": "Game Modifier IDs",
-    "Description": "Comma-separated game modifier IDs applied to new matches when the lobby does not override them.",
-    "FieldName": "GameModifierIdsCsv",
-    "InputType": "text",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Advanced",
-    "ParamFieldName": "CustomServer.MatchDefaults.GameModifierIdsCsv",
-    "DefaultValue": ""
-  },
-  {
-    "DisplayName": "Dimension Data JSON",
-    "Description": "Advanced JSON array, for example [{\"dimensionId\":1,\"rounds\":[1,2]}].",
-    "FieldName": "DimensionDataJson",
-    "InputType": "textarea",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Advanced",
-    "ParamFieldName": "CustomServer.MatchDefaults.DimensionDataJson",
-    "DefaultValue": ""
-  },
-  {
-    "DisplayName": "Char Select Milliseconds",
-    "FieldName": "CharSelectMillis",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Timers",
-    "ParamFieldName": "CustomServer.MatchDefaults.CharSelectMillis",
-    "DefaultValue": "20000"
-  },
-  {
-    "DisplayName": "Spawn Select Milliseconds",
-    "FieldName": "SpawnSelectMillis",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Timers",
-    "ParamFieldName": "CustomServer.MatchDefaults.SpawnSelectMillis",
-    "DefaultValue": "10000"
-  },
-  {
-    "DisplayName": "Spawn Show Milliseconds",
-    "FieldName": "SpawnShowMillis",
-    "InputType": "number",
-    "Category": "Custom Match Settings",
-    "Subcategory": "Timers",
-    "ParamFieldName": "CustomServer.MatchDefaults.SpawnShowMillis",
-    "DefaultValue": "3000"
-  },
-  {
-    "DisplayName": "Admin API Token",
-    "Description": "Token required for /admin endpoints. Leave empty only for loopback-only local testing.",
-    "FieldName": "AdminApiToken",
-    "InputType": "password",
-    "Category": "Administration",
-    "Subcategory": "Access Control",
-    "ParamFieldName": "CustomServer.Admin.ApiToken",
-    "DefaultValue": ""
-  },
-  {
-    "DisplayName": "In-Game Admin Account IDs",
-    "Description": "Comma, semicolon, or newline separated account IDs that receive isAdmin=true and may use in-match dev/admin UI.",
-    "FieldName": "AdminAccountIdsCsv",
-    "InputType": "textarea",
-    "Category": "Administration",
-    "Subcategory": "Access Control",
-    "ParamFieldName": "CustomServer.Admin.AdminAccountIdsCsv",
-    "DefaultValue": ""
-  },
-  {
-    "DisplayName": "Banned Account IDs",
-    "Description": "Comma, semicolon, or newline separated account IDs blocked from login and WebSocket lobby access.",
-    "FieldName": "BannedAccountIdsCsv",
-    "InputType": "textarea",
-    "Category": "Administration",
-    "Subcategory": "Access Control",
-    "ParamFieldName": "CustomServer.Admin.BannedAccountIdsCsv",
-    "DefaultValue": ""
-  }
+﻿[
+    {
+        "DisplayName":  "Public Base URL",
+        "Description":  "External URL clients use for socket discovery and WebSocket lobby traffic.",
+        "FieldName":  "PublicBaseUrl",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Endpoints",
+        "ParamFieldName":  "$.CustomServer.PublicBaseUrl",
+        "DefaultValue":  "http://ark.atomi23.de:{{$ApplicationPort1}}"
+    },
+    {
+        "DisplayName":  "Public Game Host",
+        "Description":  "Host or IP sent to clients for KCP/TCP/WS match connections.",
+        "FieldName":  "PublicGameHost",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Endpoints",
+        "ParamFieldName":  "$.CustomServer.PublicGameHost",
+        "DefaultValue":  "ark.atomi23.de"
+    },
+    {
+        "DisplayName":  "Launch Match Processes",
+        "Description":  "Spawn one bapbap.exe game-server process per match. Disable only when pointing clients at an external match host.",
+        "FieldName":  "LaunchGameServers",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.LaunchGameServers",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Require Bootstrap",
+        "Description":  "Fail match start if the launched game process does not accept setup-game/add-teams/queue-matched.",
+        "FieldName":  "RequireGameServerBootstrap",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.RequireGameServerBootstrap",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Require KCP Port",
+        "Description":  "Fail match start if the launched game process accepts bootstrap but does not expose the KCP UDP match port. Keep enabled for AMP/Wine.",
+        "FieldName":  "RequireGameServerKcpPort",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.RequireGameServerKcpPort",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Game Executable Path",
+        "Description":  "Path to the Windows bapbap.exe (or Linux dedicated binary). Relative to the server root.",
+        "FieldName":  "GameExecutablePath",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.GameExecutablePath",
+        "DefaultValue":  "./game/bapbap.exe"
+    },
+    {
+        "DisplayName":  "Game Working Directory",
+        "Description":  "Working directory used when launching match processes.",
+        "FieldName":  "GameWorkingDirectory",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.GameWorkingDirectory",
+        "DefaultValue":  "./game"
+    },
+    {
+        "DisplayName":  "Game Launcher Path",
+        "Description":  "Wrapper used to launch the game. On AMP+wine this is /usr/bin/env which lets us prefix env vars.",
+        "FieldName":  "GameLauncherPath",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.GameLauncherPath",
+        "DefaultValue":  "/usr/bin/env"
+    },
+    {
+        "DisplayName":  "Game Launcher Arguments",
+        "Description":  "Arguments to the launcher. {gameExecutable} and {gameArguments} are placeholders.",
+        "FieldName":  "GameLauncherArguments",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.GameLauncherArguments",
+        "DefaultValue":  "WINEDLLOVERRIDES=version=n,b /usr/bin/xvfb-run -a /usr/bin/wine \"{gameExecutable}\" {gameArguments}"
+    },
+    {
+        "DisplayName":  "Additional Game Arguments",
+        "Description":  "Extra command line passed to the dedicated bapbap.exe. Tweak only if you know what you\u0027re doing.",
+        "FieldName":  "AdditionalGameArguments",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.AdditionalGameArguments",
+        "DefaultValue":  "--melonloader.agfoffline --bapcustom-use-proxy=false --bapcustom-show-ui=false"
+    },
+    {
+        "DisplayName":  "Game Server Ready Timeout (seconds)",
+        "Description":  "How long to wait for the dedicated game server to accept bootstrap data before giving up.",
+        "FieldName":  "GameServerReadyTimeoutSeconds",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.GameServerReadyTimeoutSeconds",
+        "DefaultValue":  "150"
+    },
+    {
+        "DisplayName":  "Public Game Port - WebSocket",
+        "Description":  "Match WebSocket TCP port advertised to clients. Should match AMP\u0027s ApplicationPort2.",
+        "FieldName":  "BaseWsPort",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.BaseWsPort",
+        "DefaultValue":  "{{$ApplicationPort2}}"
+    },
+    {
+        "DisplayName":  "Public Game Port - KCP (UDP)",
+        "Description":  "KCP UDP port for in-match traffic. Must be UDP. Match AMP\u0027s ApplicationPort3.",
+        "FieldName":  "BaseKcpPort",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.BaseKcpPort",
+        "DefaultValue":  "{{$ApplicationPort3}}"
+    },
+    {
+        "DisplayName":  "Public Game Port - TCP",
+        "Description":  "Match TCP transport fallback port. Match AMP\u0027s ApplicationPort4.",
+        "FieldName":  "BaseTcpPort",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.BaseTcpPort",
+        "DefaultValue":  "{{$ApplicationPort4}}"
+    },
+    {
+        "DisplayName":  "Public Game Port - Bootstrap HTTP",
+        "Description":  "Internal HTTP port used by the lobby to push setup-game/add-teams/queue-matched data into the dedicated server. Match AMP\u0027s ApplicationPort5.",
+        "FieldName":  "BaseHttpPort",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.BaseHttpPort",
+        "DefaultValue":  "{{$ApplicationPort5}}"
+    },
+    {
+        "DisplayName":  "Port Search Range",
+        "Description":  "How many sequential match port sets the server may use. Keep 1 unless the AMP template exposes a matching public port range.",
+        "FieldName":  "PortSearchRange",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.PortSearchRange",
+        "DefaultValue":  "1"
+    },
+    {
+        "DisplayName":  "Max Concurrent Matches",
+        "Description":  "Maximum simultaneously running matches. Keep 1 with the default single AMP port set.",
+        "FieldName":  "MaxConcurrentMatches",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.MaxConcurrentMatches",
+        "DefaultValue":  "1"
+    },
+    {
+        "DisplayName":  "Default Game Mode",
+        "Description":  "Game mode used for matchmaking + the default lobby. Solos / Duos / FreeForAll / Custom.",
+        "FieldName":  "DefaultGameMode",
+        "InputType":  "enum",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Game Mode",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultGameMode",
+        "DefaultValue":  "3",
+        "EnumValues":  {
+                           "0":  "Warmup",
+                           "1":  "Mini Duos",
+                           "2":  "Mini Trios",
+                           "3":  "Solos",
+                           "4":  "Duos",
+                           "5":  "Trios",
+                           "6":  "Ranked Duos",
+                           "7":  "Ranked Trios",
+                           "8":  "Event",
+                           "9":  "Free For All",
+                           "10":  "Custom Game"
+                       }
+    },
+    {
+        "DisplayName":  "Default Team Size",
+        "Description":  "Players per team in matchmaking. 1 = solo / FFA, 2 = duos, 3 = trios.",
+        "FieldName":  "DefaultTeamSize",
+        "InputType":  "enum",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Game Mode",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultTeamSize",
+        "DefaultValue":  "1",
+        "EnumValues":  {
+                           "1":  "1 (Solo)",
+                           "2":  "2 (Duo)",
+                           "3":  "3 (Trio)",
+                           "4":  "4"
+                       }
+    },
+    {
+        "DisplayName":  "Default Max Teams",
+        "Description":  "Maximum number of teams per match. 8 = standard battle royale.",
+        "FieldName":  "DefaultMaxTeams",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Game Mode",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultMaxTeams",
+        "DefaultValue":  "8"
+    },
+    {
+        "DisplayName":  "Queue Timer (seconds)",
+        "Description":  "Seconds before matchmaking starts after the first player queues. 0 = instant.",
+        "FieldName":  "QueueTimerSeconds",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Matchmaking",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.QueueTimerSeconds",
+        "DefaultValue":  "30"
+    },
+    {
+        "DisplayName":  "Min Players To Start",
+        "Description":  "Minimum humans before queue can start. Bots fill the remaining slots.",
+        "FieldName":  "MinPlayersToStart",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Matchmaking",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.MinPlayersToStart",
+        "DefaultValue":  "1"
+    },
+    {
+        "DisplayName":  "Default Bot Count",
+        "Description":  "How many bot teams to spawn per match.",
+        "FieldName":  "DefaultBotCount",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Bots",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultBotCount",
+        "DefaultValue":  "4"
+    },
+    {
+        "DisplayName":  "Default Bot Difficulty",
+        "Description":  "AI bot difficulty.",
+        "FieldName":  "DefaultBotDifficulty",
+        "InputType":  "enum",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Bots",
+        "ParamFieldName":  "$.CustomServer.MatchmakingQueue.DefaultBotDifficulty",
+        "DefaultValue":  "1",
+        "EnumValues":  {
+                           "0":  "Easy",
+                           "1":  "Normal",
+                           "2":  "Medium",
+                           "3":  "Hard",
+                           "4":  "Expert"
+                       }
+    },
+    {
+        "DisplayName":  "Char Select Time (ms)",
+        "Description":  "Pre-match character selection duration in milliseconds.",
+        "FieldName":  "CharSelectMillis",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Timings",
+        "ParamFieldName":  "$.CustomServer.MatchDefaults.CharSelectMillis",
+        "DefaultValue":  "20000"
+    },
+    {
+        "DisplayName":  "Spawn Select Time (ms)",
+        "Description":  "Spawn-point pick duration in milliseconds.",
+        "FieldName":  "SpawnSelectMillis",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Match Defaults",
+        "Subcategory":  "Timings",
+        "ParamFieldName":  "$.CustomServer.MatchDefaults.SpawnSelectMillis",
+        "DefaultValue":  "10000"
+    },
+    {
+        "DisplayName":  "Enable Anna",
+        "Description":  "Allow Anna (charId 1) in matchmaking.",
+        "FieldName":  "EnableAnna",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableAnna",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Bishop",
+        "Description":  "Allow Bishop (charId 11) in matchmaking.",
+        "FieldName":  "EnableBishop",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableBishop",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Celeste",
+        "Description":  "Allow Celeste (charId 12) in matchmaking.",
+        "FieldName":  "EnableCeleste",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableCeleste",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Chuck",
+        "Description":  "Allow Chuck (charId 2) in matchmaking.",
+        "FieldName":  "EnableChuck",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableChuck",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Froggy",
+        "Description":  "Allow Froggy (charId 7) in matchmaking.",
+        "FieldName":  "EnableFroggy",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableFroggy",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Jiro",
+        "Description":  "Allow Jiro (charId 10) in matchmaking.",
+        "FieldName":  "EnableJiro",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableJiro",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Kate",
+        "Description":  "Allow Kate (charId 13) in matchmaking.",
+        "FieldName":  "EnableKate",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableKate",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Kiddo",
+        "Description":  "Allow Kiddo (charId 4) in matchmaking.",
+        "FieldName":  "EnableKiddo",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableKiddo",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Kitsu",
+        "Description":  "Allow Kitsu (charId 0) in matchmaking.",
+        "FieldName":  "EnableKitsu",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableKitsu",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Rocky",
+        "Description":  "Allow Rocky (charId 14) in matchmaking.",
+        "FieldName":  "EnableRocky",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableRocky",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Sashimi",
+        "Description":  "Allow Sashimi (charId 3) in matchmaking.",
+        "FieldName":  "EnableSashimi",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableSashimi",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Skinny",
+        "Description":  "Allow Skinny (charId 6) in matchmaking.",
+        "FieldName":  "EnableSkinny",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableSkinny",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Sofia",
+        "Description":  "Allow Sofia (charId 9) in matchmaking.",
+        "FieldName":  "EnableSofia",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableSofia",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Teevee",
+        "Description":  "Allow Teevee (charId 8) in matchmaking.",
+        "FieldName":  "EnableTeevee",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableTeevee",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Zook",
+        "Description":  "Allow Zook (charId 5) in matchmaking.",
+        "FieldName":  "EnableZook",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableZook",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Map ID 1 (Tire Club)",
+        "Description":  "Include map ID 1 in the random map pool. Confirmed in playtest as Tire Club.",
+        "FieldName":  "EnableMapTireclub",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Maps",
+        "Subcategory":  "Map Pool",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapTireclub",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Map ID 2",
+        "Description":  "Include map ID 2 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
+        "FieldName":  "EnableMapBazaarcity",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Maps",
+        "Subcategory":  "Map Pool",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapBazaarcity",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Map ID 3",
+        "Description":  "Include map ID 3 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
+        "FieldName":  "EnableMapBonsai",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Maps",
+        "Subcategory":  "Map Pool",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapBonsai",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Enable Map ID 4",
+        "Description":  "Include map ID 4 in the random map pool. Real BAPBAP map name not confirmed - test in-game to identify.",
+        "FieldName":  "EnableMapSunset",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Maps",
+        "Subcategory":  "Map Pool",
+        "ParamFieldName":  "$.CustomServer.MapPool.EnableMapSunset",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "All Maps in All Modes",
+        "Description":  "When ON, every enabled map above can spawn in EVERY game mode (Solos / Duos / Trios / FFA / Custom). Solos can land on a Trios-default map, Trios on a Solos-default map, etc. When OFF, the per-mode MapMapping list applies. Recommended ON for private servers where you want full map control.",
+        "FieldName":  "AllMapsAllModes",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Maps",
+        "Subcategory":  "Map Pool",
+        "ParamFieldName":  "$.CustomServer.MapPool.AllMapsAllModes",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Randomize Map Per Match",
+        "Description":  "Pick a random map from the enabled pool for each match. If false, mapId 1 (Tireclub) is always used.",
+        "FieldName":  "RandomizeMapPerMatch",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Maps",
+        "Subcategory":  "Map Pool",
+        "ParamFieldName":  "$.CustomServer.MatchDefaults.RandomizeMapPerMatch",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Unlock Everything (Master)",
+        "Description":  "Master switch that grants every cosmetic asset to every player. When ON, the per-category toggles below are bypassed and ALL categories are unlocked. Recommended for private servers.",
+        "FieldName":  "UnlockEverything",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Master",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockEverything",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Unlock All Skins",
+        "Description":  "Grant every character skin (asset id 300000-300026) to every player.",
+        "FieldName":  "UnlockAllSkins",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Per Category",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllSkins",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Unlock All Banners",
+        "Description":  "Grant every player banner (asset id 500000+) to every player.",
+        "FieldName":  "UnlockAllBanners",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Per Category",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllBanners",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Unlock All Emotes",
+        "Description":  "Grant every emote (asset id 400000+). WARNING: emote IDs are fragile in BAPBAP and some can crash the locker UI. Default OFF.",
+        "FieldName":  "UnlockAllEmotes",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Per Category",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllEmotes",
+        "DefaultValue":  "false",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Unlock All Mastery Badges",
+        "Description":  "Grant every mastery badge (asset id 600000+).",
+        "FieldName":  "UnlockAllMasteryBadges",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Per Category",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllMasteryBadges",
+        "DefaultValue":  "false",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Unlock All Tombstones",
+        "Description":  "Grant every tombstone (asset id 700000+).",
+        "FieldName":  "UnlockAllTombstones",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Per Category",
+        "ParamFieldName":  "$.CustomServer.Unlocks.UnlockAllTombstones",
+        "DefaultValue":  "false",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Grant All Currencies",
+        "Description":  "Grant a large gold/fractals/charTokens balance to every player.",
+        "FieldName":  "GrantAllCurrencies",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Per Category",
+        "ParamFieldName":  "$.CustomServer.Unlocks.GrantAllCurrencies",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Currency Balance",
+        "Description":  "Balance reported for granted currencies (gold etc.).",
+        "FieldName":  "CurrencyBalance",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Unlocks",
+        "Subcategory":  "Currency",
+        "ParamFieldName":  "$.CustomServer.Unlocks.CurrencyBalance",
+        "DefaultValue":  "999999"
+    },
+    {
+        "DisplayName":  "Shop Slot 1 - Item",
+        "Description":  "Cosmetic in the rotating shop slot 1. Pick None to disable. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names.",
+        "FieldName":  "ShopSlot1Asset",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Shop",
+        "Subcategory":  "Slot 1",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot1AssetId",
+        "DefaultValue":  "500001"
+    },
+    {
+        "DisplayName":  "Shop Slot 1 - Price",
+        "Description":  "Gold price for slot 1.",
+        "FieldName":  "ShopSlot1Price",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Shop",
+        "Subcategory":  "Slot 1",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot1Price",
+        "DefaultValue":  "100"
+    },
+    {
+        "DisplayName":  "Shop Slot 2 - Item",
+        "Description":  "Cosmetic in the rotating shop slot 2. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names.",
+        "FieldName":  "ShopSlot2Asset",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Shop",
+        "Subcategory":  "Slot 2",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot2AssetId",
+        "DefaultValue":  "500005"
+    },
+    {
+        "DisplayName":  "Shop Slot 2 - Price",
+        "Description":  "Gold price for slot 2.",
+        "FieldName":  "ShopSlot2Price",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Shop",
+        "Subcategory":  "Slot 2",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot2Price",
+        "DefaultValue":  "150"
+    },
+    {
+        "DisplayName":  "Shop Slot 3 - Item",
+        "Description":  "Cosmetic in the rotating shop slot 3. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names.",
+        "FieldName":  "ShopSlot3Asset",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Shop",
+        "Subcategory":  "Slot 3",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot3AssetId",
+        "DefaultValue":  "500010"
+    },
+    {
+        "DisplayName":  "Shop Slot 3 - Price",
+        "Description":  "Gold price for slot 3.",
+        "FieldName":  "ShopSlot3Price",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Shop",
+        "Subcategory":  "Slot 3",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.Slot3Price",
+        "DefaultValue":  "200"
+    },
+    {
+        "DisplayName":  "Shop Freebie",
+        "Description":  "Free item available to every player. Pick None to disable. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names. Enter a numeric AssetId. See BAPBAP-Asset-Reference.md for the full list of IDs and names.",
+        "FieldName":  "ShopFreebieAsset",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Shop",
+        "Subcategory":  "Freebie",
+        "ParamFieldName":  "$.CustomServer.ShopSlots.FreebieAssetId",
+        "DefaultValue":  "500002"
+    },
+    {
+        "DisplayName":  "Network Tuning Enabled",
+        "Description":  "Apply optimized Mirror+KCP settings on the dedicated server. Significantly improves projectile sync (e.g. flamethrower-bot AI) under wine. Recommended ON.",
+        "FieldName":  "NetTuneEnabled",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Server Performance",
+        "Subcategory":  "Network Tuning",
+        "ParamFieldName":  "$.CustomServer.Network.Enabled",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Mirror Send Rate (Hz)",
+        "Description":  "Snapshot send rate from the dedicated server to clients. 60 = smoother, 30 = bandwidth-friendly.",
+        "FieldName":  "NetSendRate",
+        "InputType":  "enum",
+        "Category":  "BAPBAP - Server Performance",
+        "Subcategory":  "Network Tuning",
+        "ParamFieldName":  "$.CustomServer.Network.SendRate",
+        "DefaultValue":  "60",
+        "EnumValues":  {
+                           "20":  "20 Hz (low bandwidth)",
+                           "30":  "30 Hz (default)",
+                           "60":  "60 Hz (smooth)",
+                           "120":  "120 Hz (LAN)"
+                       }
+    },
+    {
+        "DisplayName":  "KCP Send Window",
+        "Description":  "KCP transport send window size. Higher = more in-flight packets, better for low-loss links.",
+        "FieldName":  "KcpSendWindow",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Server Performance",
+        "Subcategory":  "Network Tuning",
+        "ParamFieldName":  "$.CustomServer.Network.KcpSendWindow",
+        "DefaultValue":  "4096"
+    },
+    {
+        "DisplayName":  "Disable Interpolation On Projectiles",
+        "Description":  "Skip Mirror\u0027s interpolation buffer for projectile-named transforms so AI bullets/flames render immediately. Recommended ON.",
+        "FieldName":  "NetDisableProjectileInterp",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Server Performance",
+        "Subcategory":  "Network Tuning",
+        "ParamFieldName":  "$.CustomServer.Network.DisableInterpolationForProjectiles",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Max Friends Per Player",
+        "Description":  "Maximum number of friends a single account can have.",
+        "FieldName":  "MaxFriendsPerPlayer",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Friends and Economy",
+        "Subcategory":  "Friends",
+        "ParamFieldName":  "$.CustomServer.Friends.MaxFriendsPerPlayer",
+        "DefaultValue":  "100"
+    },
+    {
+        "DisplayName":  "Starting Gold",
+        "Description":  "Gold every NEW account gets on first login.",
+        "FieldName":  "StartingGold",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Friends and Economy",
+        "Subcategory":  "Economy",
+        "ParamFieldName":  "$.CustomServer.Economy.StartingGold",
+        "DefaultValue":  "1000"
+    },
+    {
+        "DisplayName":  "Win Gold",
+        "Description":  "Gold awarded for winning a match.",
+        "FieldName":  "WinGold",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Friends and Economy",
+        "Subcategory":  "Economy",
+        "ParamFieldName":  "$.CustomServer.Economy.WinGold",
+        "DefaultValue":  "500"
+    },
+    {
+        "DisplayName":  "Kill Gold",
+        "Description":  "Gold awarded per kill.",
+        "FieldName":  "KillGold",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Friends and Economy",
+        "Subcategory":  "Economy",
+        "ParamFieldName":  "$.CustomServer.Economy.KillGold",
+        "DefaultValue":  "50"
+    },
+    {
+        "DisplayName":  "Participation Gold",
+        "Description":  "Gold awarded just for finishing a match.",
+        "FieldName":  "ParticipationGold",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Friends and Economy",
+        "Subcategory":  "Economy",
+        "ParamFieldName":  "$.CustomServer.Economy.ParticipationGold",
+        "DefaultValue":  "25"
+    },
+    {
+        "DisplayName":  "Admin API Token",
+        "Description":  "Bearer token for /api/admin/* endpoints. Empty = loopback-only admin (no remote admin).",
+        "FieldName":  "AdminApiToken",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Access Control",
+        "Subcategory":  "Admin",
+        "ParamFieldName":  "$.CustomServer.Admin.ApiToken",
+        "DefaultValue":  ""
+    },
+    {
+        "DisplayName":  "Admin Account IDs (CSV)",
+        "Description":  "Comma-separated AccountIds that have admin privileges. Use the ones generated by the client\u0027s first-launch identity setup.",
+        "FieldName":  "AdminAccountIdsCsv",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Access Control",
+        "Subcategory":  "Admin",
+        "ParamFieldName":  "$.CustomServer.Admin.AdminAccountIdsCsv",
+        "DefaultValue":  ""
+    },
+    {
+        "DisplayName":  "Banned Account IDs (CSV)",
+        "Description":  "Comma-separated AccountIds that are banned from joining matches.",
+        "FieldName":  "BannedAccountIdsCsv",
+        "InputType":  "text",
+        "Category":  "BAPBAP - Access Control",
+        "Subcategory":  "Admin",
+        "ParamFieldName":  "$.CustomServer.Admin.BannedAccountIdsCsv",
+        "DefaultValue":  ""
+    }
 ]

@@ -1,6 +1,7 @@
 [
   {
-    "ConfigFile": "BapCustomServer/appsettings.json",
+    "ConfigFile": "appsettings.json",
+    "ConfigType": "json",
     "AutoMap": true,
     "Importable": true
   }

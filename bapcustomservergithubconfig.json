@@ -7,7 +7,7 @@
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Endpoints",
         "ParamFieldName":  "$.CustomServer.PublicBaseUrl",
-        "DefaultValue":  "http://{{$ApplicationIPBinding}}:{{$ApplicationPort1}}"
+        "DefaultValue":  "http://ark.atomi23.de:{{$ApplicationPort1}}"
     },
     {
         "DisplayName":  "Public Game Host",
@@ -17,7 +17,7 @@
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Endpoints",
         "ParamFieldName":  "$.CustomServer.PublicGameHost",
-        "DefaultValue":  "{{$ApplicationIPBinding}}"
+        "DefaultValue":  "ark.atomi23.de"
     },
     {
         "DisplayName":  "Launch Match Processes",
@@ -41,6 +41,20 @@
         "Category":  "BAPBAP - Network",
         "Subcategory":  "Match Host",
         "ParamFieldName":  "$.CustomServer.RequireGameServerBootstrap",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
+        "DisplayName":  "Require KCP Port",
+        "Description":  "Fail match start if the launched game process accepts bootstrap but does not expose the KCP UDP match port. Keep enabled for AMP/Wine.",
+        "FieldName":  "RequireGameServerKcpPort",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Host",
+        "ParamFieldName":  "$.CustomServer.RequireGameServerKcpPort",
         "DefaultValue":  "true",
         "EnumValues":  {
                            "true":  "True",
@@ -146,6 +160,26 @@
         "Subcategory":  "Match Ports",
         "ParamFieldName":  "$.CustomServer.BaseHttpPort",
         "DefaultValue":  "{{$ApplicationPort5}}"
+    },
+    {
+        "DisplayName":  "Port Search Range",
+        "Description":  "How many sequential match port sets the server may use. Keep 1 unless the AMP template exposes a matching public port range.",
+        "FieldName":  "PortSearchRange",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.PortSearchRange",
+        "DefaultValue":  "1"
+    },
+    {
+        "DisplayName":  "Max Concurrent Matches",
+        "Description":  "Maximum simultaneously running matches. Keep 1 with the default single AMP port set.",
+        "FieldName":  "MaxConcurrentMatches",
+        "InputType":  "number",
+        "Category":  "BAPBAP - Network",
+        "Subcategory":  "Match Ports",
+        "ParamFieldName":  "$.CustomServer.MaxConcurrentMatches",
+        "DefaultValue":  "1"
     },
     {
         "DisplayName":  "Default Game Mode",

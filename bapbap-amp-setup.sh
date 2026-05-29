@@ -145,7 +145,7 @@ cat <<EOF
 Instance "$INSTANCE" is starting. Open the AMP web UI Console tab to watch
 the live output. Within 10–30 seconds you should see:
 
-  Now listening on: http://0.0.0.0:5058
+  Now listening on: http://0.0.0.0:5055
 
 — that's the regex AMP looks for to flip status to "Ready".
 
