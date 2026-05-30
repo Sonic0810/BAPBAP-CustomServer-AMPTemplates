@@ -424,6 +424,20 @@
                        }
     },
     {
+        "DisplayName":  "Enable Medusa",
+        "Description":  "Allow Medusa (custom charId 15) in matchmaking. Requires the bundled BAPBAP.Medusa mod files.",
+        "FieldName":  "EnableMedusa",
+        "InputType":  "checkbox",
+        "Category":  "BAPBAP - Characters",
+        "Subcategory":  "Roster",
+        "ParamFieldName":  "$.CustomServer.Roster.EnableMedusa",
+        "DefaultValue":  "true",
+        "EnumValues":  {
+                           "true":  "True",
+                           "false":  "False"
+                       }
+    },
+    {
         "DisplayName":  "Enable Rocky",
         "Description":  "Allow Rocky (charId 14) in matchmaking.",
         "FieldName":  "EnableRocky",

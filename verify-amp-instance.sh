@@ -69,6 +69,10 @@ require_file "./appsettings.json"
 require_file "./deployment-info.json"
 require_file "./game/Mods/BapCustomServerMelon.dll"
 require_file "./game/Mods/BapCustomServer.ini"
+require_file "./game/Mods/BAPBAP.ModAPI.dll"
+require_file "./game/UserLibs/BAPBAP.ModAPI.dll"
+require_file "./game/Mods/BAPBAP.Medusa.dll"
+require_file "./game/UserData/Medusa/medusa.bundle"
 require_file "./game/UserData/MelonPreferences.cfg"
 
 if command -v sha256sum >/dev/null 2>&1 && [ -f "./game/Mods/BapCustomServerMelon.dll" ]; then
@@ -80,6 +84,17 @@ if command -v sha256sum >/dev/null 2>&1 && [ -f "./game/Mods/BapCustomServerMelo
   fi
 else
   warn "sha256sum unavailable; skipped mod DLL hash check"
+fi
+
+if command -v sha256sum >/dev/null 2>&1; then
+  for medusa_file in \
+    "./game/Mods/BAPBAP.ModAPI.dll" \
+    "./game/Mods/BAPBAP.Medusa.dll" \
+    "./game/UserData/Medusa/medusa.bundle"; do
+    if [ -f "$medusa_file" ]; then
+      ok "$(basename "$medusa_file") sha256: $(sha256sum "$medusa_file" | awk '{print toupper($1)}')"
+    fi
+  done
 fi
 
 if command -v python3 >/dev/null 2>&1; then
@@ -112,7 +127,14 @@ for key, expected_value in expected.items():
 if bad:
     print("FAIL: appsettings mismatch: " + "; ".join(bad), file=sys.stderr)
     sys.exit(13)
-print("OK: appsettings public host/ports/update-safety values")
+available = custom.get("MatchDefaults", {}).get("AvailableCharacters", [])
+if 15 not in available:
+    print(f"FAIL: Medusa charId 15 missing from MatchDefaults.AvailableCharacters: {available!r}", file=sys.stderr)
+    sys.exit(16)
+if custom.get("Roster", {}).get("EnableMedusa") is not True:
+    print(f"FAIL: CustomServer.Roster.EnableMedusa is not true: {custom.get('Roster', {}).get('EnableMedusa')!r}", file=sys.stderr)
+    sys.exit(17)
+print("OK: appsettings public host/ports/update-safety values + Medusa roster")
 PY
   rc=$?
   if [ "$rc" -ne 0 ]; then
