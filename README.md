@@ -44,7 +44,20 @@ Web panel install:
 2. Create a new instance from `BAPBAP Custom Server GitHub AutoInstall`.
 3. Press `Update` once. This downloads and installs the full package.
 4. Press `Start`.
-5. Open `http://ark.atomi23.de:5055/health`; expected response is `{"ok":true}`.
+5. Open `http://ark.atomi23.de:5055/health`; expected response includes
+   `"ok":true` and the current release label.
+
+Current proven release:
+
+```text
+bapcustomserver-20260530-cleanlogs
+```
+
+Current tested mod DLL SHA256:
+
+```text
+035F05098CD3A413B79A51530099D5C68754A28256C5AA09C50994CE0DEF40A5
+```
 
 Preserved runtime data:
 
@@ -68,6 +81,17 @@ Required port exposure:
 - `7778/udp` for match KCP.
 - `7779/tcp` for match TCP fallback.
 - `7850/tcp` for bootstrap HTTP if the AMP/container setup requires explicit exposure.
+
+Required Linux/Wine runtime:
+
+- Wine with 32-bit support (`wine`, `wine32`, `wine64`).
+- `xvfb` and `xauth`.
+- Mesa software graphics packages, including i386 variants.
+- No `winetricks` step is required for the proven path.
+
+The match launcher must remain `./start-match.sh`. Do not replace it with raw
+`wine` or `xvfb-run`, because the wrapper owns diagnostics, Wine prefix reset,
+software graphics defaults, and Unity graphics mode selection.
 
 Before publishing, run the local Linux-layout smoke test:
 
