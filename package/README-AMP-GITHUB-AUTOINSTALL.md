@@ -44,7 +44,28 @@ Web panel install:
 2. Create a new instance from `BAPBAP Custom Server GitHub AutoInstall`.
 3. Press `Update` once. This downloads and installs the full package.
 4. Press `Start`.
-5. Open `http://ark.atomi23.de:5055/health`; expected response is `{"ok":true}`.
+5. Open `http://ark.atomi23.de:5055/health`; expected response includes
+   `"ok":true` and the current release label.
+
+Current packaged release:
+
+```text
+bapcustomserver-20260531-medusa-v171
+```
+
+Current tested mod DLL SHA256:
+
+```text
+3E796F1E22D124F6433DAE5BC67149A4A25D0CB5FD607DAB11FFE6934EA15E8D
+```
+
+Current Medusa artifacts:
+
+```text
+BAPBAP.ModAPI.dll 0E14F39A9C47B6EBA106A0F23E76A0989B3270D7BCDD3E4BB0DD51E63BDB3CB5
+BAPBAP.Medusa.dll 272582AACBD37A2DF7CD61D89A1838F5784E3E54695C83B657EEBC2FE8430D83
+medusa.bundle     2F2CCF12032185E8ED66652417BDEADA764299C523073B7A77205391BA8A2A02
+```
 
 Preserved runtime data:
 
@@ -68,6 +89,17 @@ Required port exposure:
 - `7778/udp` for match KCP.
 - `7779/tcp` for match TCP fallback.
 - `7850/tcp` for bootstrap HTTP if the AMP/container setup requires explicit exposure.
+
+Required Linux/Wine runtime:
+
+- Wine with 32-bit support (`wine`, `wine32`, `wine64`).
+- `xvfb` and `xauth`.
+- Mesa software graphics packages, including i386 variants.
+- No `winetricks` step is required for the proven path.
+
+The match launcher must remain `./start-match.sh`. Do not replace it with raw
+`wine` or `xvfb-run`, because the wrapper owns diagnostics, Wine prefix reset,
+software graphics defaults, and Unity graphics mode selection.
 
 Before publishing, run the local Linux-layout smoke test:
 
